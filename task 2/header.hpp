@@ -68,12 +68,20 @@ class Minesweeper{
     
     }
 
+    void incrementValue(int y, int x){
+        int tempInt = 0;
+
+        tempInt = stoi(grid[y][x].value);
+        tempInt++;
+        grid[y][x].value = "0" + to_string(tempInt);
+    }
+
     void generateGridValues(){
 
         srand((unsigned) time(NULL)); //to always generate new numbers
 
         int mineCount = 0; //to check how many mines have been generated
-        int randY, randX, tempInt;
+        int randY, randX;
 
         while(mineCount < noMines){
 
@@ -89,69 +97,58 @@ class Minesweeper{
 
                 //x-1 y-1
                 if(!((randY-1 < 0) || (randX-1 < 0)) && !(checkMine(randY-1, randX-1))){
-                    tempInt = stoi(grid[randY-1][randX-1].value);
-                    tempInt++;
-                    grid[randY-1][randX-1].value = "0" + to_string(tempInt);
                 
+                    incrementValue(randY-1, randX-1);
+
                 }
 
                 //x y-1
                 if(!(randX-1 < 0) && !(checkMine(randY, randX-1))){
 
-                    tempInt = stoi(grid[randY][randX-1].value);
-                    tempInt++;
-                    grid[randY][randX-1].value = "0" + to_string(tempInt);
+                    incrementValue(randY, randX-1);
 
                 }
 
                 //x+1 y-1
                 if(!((randY+1 > 15) || (randX-1 < 0)) && !(checkMine(randY+1, randX-1))){
 
-                    tempInt = stoi(grid[randY+1][randX-1].value);
-                    tempInt++;
-                    grid[randY+1][randX-1].value = "0" + to_string(tempInt);
+                    incrementValue(randY+1, randX-1);
 
                 }
 
                 //x-1 y
                 if(!(randY-1 < 0) && !(checkMine(randY-1, randX))){
                     
-                    tempInt = stoi(grid[randY-1][randX].value);
-                    tempInt++;
-                    grid[randY-1][randX].value = "0" + to_string(tempInt);
+                    incrementValue(randY-1, randX);
 
                 }
 
                 //x+1 y
                 if(!(randY+1 > 15) && !(checkMine(randY+1, randX))){
-                    
-                    tempInt = stoi(grid[randY+1][randX].value);
-                    tempInt++;
-                    grid[randY+1][randX].value = "0" + to_string(tempInt);
+
+                    incrementValue(randY+1, randX);
 
                 }
 
                 //x-1 y+1 
                 if(!((randY-1 < 0) || (randX+1 > 15)) && !(checkMine(randY-1, randX+1))){
 
-                    tempInt = stoi(grid[randY-1][randX+1].value);
-                    tempInt++;
-                    grid[randY-1][randX+1].value = "0" + to_string(tempInt);
+                    incrementValue(randY-1, randX+1);
 
                 }
 
                 //x y+1 
                 if(!(randX+1 > 15) && !(checkMine(randY, randX+1))){
-                    tempInt = stoi(grid[randY][randX+1].value);
-                    tempInt++;
-                    grid[randY][randX+1].value = "0" + to_string(tempInt);
+                
+                    incrementValue(randY, randX+1);
+
                 }
 
                 //x+1 y+1
                 if(!((randY+1 > 15) || (randX+1 > 15)) && !(checkMine(randY+1, randX+1))){
-                    tempInt = stoi(grid[randY+1][randX+1].value);
-                    tempInt++;
-                    grid[randY+1][randX+1].value = "0" + to_string(tempInt);
+
+                    incrementValue(randY+1, randX+1);
+
                 }
 
             }
