@@ -16,7 +16,7 @@ class Minesweeper{
         Cell grid[size][size];       
         int totalCells = size*size; //total cells in grid
         int cellsOpened = 0; //cells that have been unhidden and shown to the player
-        const int noMines = 1; //DEFAULT = 40
+        const int noMines = 40; //DEFAULT = 40
         int gameCheck = 0; //0 - game is ongoing, 1 - win, 2 - lose
 
     void displayGrid(){
