@@ -1,19 +1,21 @@
 #include "header.hpp"
 
 int main(){
-
-    bool win = false;
-
+    
     Minesweeper game;
 
     game.generateGridValues();
 
-    while(game.cellsOpened < (game.totalCells-game.noMines)){
+    while(game.cellsOpened < (game.totalCells-game.noMines) && game.gameCheck == 0){
         game.userInput();
-        win = true;
+        
+        if(game.gameCheck == 2){
+            break;
+        }
+
     }
 
-    if (win = true){
+    if (game.gameCheck == 1){
         cout << "Good job! You've won the game.";
     }
 
