@@ -1,12 +1,10 @@
-public class Player{
+public class HumanPlayer{
     
     String playerName;
-    boolean isAI;
     Village village;
 
-    public Player(String playerName, boolean isAI){
+    public HumanPlayer(String playerName){
         this.playerName = playerName;
-        this.isAI = isAI;
         //add village constructor
     }
 

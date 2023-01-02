@@ -43,21 +43,22 @@ public class Main{
             }
         }
 
-        Player[] playerList = new Player[numberOfPlayers+numberOfAI];
+        HumanPlayer[] humanPlayerList = new HumanPlayer[numberOfPlayers];
+        AIPlayer[] aiPlayerList = new AIPlayer[numberOfAI];
 
         // declaring each player and their villages
         for (int i = 0 ; i < numberOfPlayers ; i++){
             System.out.println("\nEnter the name of player "+ (i+1)); //+1 so output is done properly
             String playerName = sc.next();
 
-            playerList[i] = new Player(playerName, false);
+            humanPlayerList[i] = new HumanPlayer(playerName);
         }
 
         // creating ai players
-        for(int i = numberOfPlayers ; i < (numberOfAI+numberOfPlayers) ; i++){ // i set to numberOfPlayers to keep proper count in array
-            String playerName = "Computer " + (i-numberOfPlayers+1);
+        for(int i = 0 ; i < numberOfAI ; i++){ // i set to numberOfPlayers to keep proper count in array
+            String playerName = "Computer " + (i+1);
             
-            playerList[i] = new Player(playerName, true);
+            aiPlayerList[i] = new AIPlayer(playerName);
         }
 
 
