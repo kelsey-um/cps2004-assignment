@@ -60,8 +60,9 @@ public class Main{
 
             int tempY = locations.remove(0);
             int tempX = locations.remove(0);
+            byte tempID = (byte)(i+1);
 
-            humanPlayerList[i] = new HumanPlayer(playerName, tempX, tempY);
+            humanPlayerList[i] = new HumanPlayer(tempID,playerName, tempX, tempY);
         }
 
         // creating ai players
@@ -70,24 +71,23 @@ public class Main{
 
             int tempY = locations.remove(0);
             int tempX = locations.remove(0);
+            byte tempID = (byte)(i+1);
 
-            aiPlayerList[i] = new AIPlayer(playerName, tempX, tempY);
+            aiPlayerList[i] = new AIPlayer(tempID, playerName, tempX, tempY);
         }
 
         map.printMap();
 
-        for(int i = 0 ; i < humanPlayerList.length ; i++){
-            System.out.println("\n\nName: " + humanPlayerList[i].playerName);
-            System.out.println("Location of village: ("+ humanPlayerList[i].locationX + ", "+ humanPlayerList[i].locationY + ")");
-        }
+        // for(int i = 0 ; i < humanPlayerList.length ; i++){
+        //     System.out.println("\n\nName: " + humanPlayerList[i].playerName);
+        //     System.out.println("Location of village: ("+ humanPlayerList[i].locationX + ", "+ humanPlayerList[i].locationY + ")");
+        // }
 
         
-        for(int i = 0 ; i < aiPlayerList.length ; i++){
-            System.out.println("\n\nName: " + aiPlayerList[i].playerName);
-            System.out.println("Location of village: ("+ aiPlayerList[i].locationX + ", "+ aiPlayerList[i].locationY + ")");
-        }
-
-        System.out.println(locations.toString());
+        // for(int i = 0 ; i < aiPlayerList.length ; i++){
+        //     System.out.println("\n\nName: " + aiPlayerList[i].playerName);
+        //     System.out.println("Location of village: ("+ aiPlayerList[i].locationX + ", "+ aiPlayerList[i].locationY + ")");
+        // }
         
 
 

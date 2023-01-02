@@ -1,4 +1,6 @@
 public class AIPlayer {
+    
+    byte playerID;
     String playerName;
 
     //location coordinates
@@ -6,7 +8,8 @@ public class AIPlayer {
     int locationY;
     Village village;
 
-    public AIPlayer(String playerName, int locationX, int locationY){
+    public AIPlayer(byte playerID, String playerName, int locationX, int locationY){
+        this.playerID = playerID;
         this.playerName = playerName;
         this.locationX = locationX;
         this.locationY = locationY;

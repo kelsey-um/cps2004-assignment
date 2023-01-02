@@ -1,5 +1,6 @@
 public class HumanPlayer{
     
+    byte playerID;
     String playerName;
 
     //location coordinates
@@ -7,7 +8,8 @@ public class HumanPlayer{
     int locationY;
     Village village;
 
-    public HumanPlayer(String playerName, int locationX, int locationY){
+    public HumanPlayer(byte playerID, String playerName, int locationX, int locationY){
+        this.playerID = playerID;
         this.playerName = playerName;
         this.locationX = locationX;
         this.locationY = locationY;

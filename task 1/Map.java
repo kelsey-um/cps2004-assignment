@@ -27,11 +27,9 @@ public class Map {
         }
 
         for(int i = 0; i < totalPlayers ; i++){  
-            
-            printMap();
 
-            boolean adjacent = false;
-            int randY = rand.nextInt(size);
+            boolean adjacent = false; // to use to check if adjacent village was found
+            int randY = rand.nextInt(size); // random coordinates
             int randX = rand.nextInt(size);
 
             if(map[randY][randX] == "--"){ //to check theres not village
@@ -39,7 +37,7 @@ public class Map {
                 //check theres no village in adjacent
 
                 //x-1 y-1
-                if(validatePos(randX-1, randY-1, size) && adjacent == false) {
+                if(validatePos(randX-1, randY-1, size) && adjacent == false) { 
                     if(map[randY-1][randX-1] != "--"){
                         adjacent = true;
                     }
@@ -109,7 +107,7 @@ public class Map {
 
         }
 
-        return locations;
+        return locations; //returning arraylist with coordinates
     }
 
     void printMap(){
