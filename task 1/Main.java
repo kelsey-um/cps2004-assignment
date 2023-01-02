@@ -56,8 +56,7 @@ public class Main{
 
         // creating ai players
         for(int i = 0 ; i < numberOfAI ; i++){ // i set to numberOfPlayers to keep proper count in array
-            String playerName = "Computer " + (i+1);
-            
+            String playerName = "Computer " + (i+numberOfPlayers+1);
             aiPlayerList[i] = new AIPlayer(playerName);
         }
 
