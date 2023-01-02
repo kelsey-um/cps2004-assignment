@@ -4,7 +4,7 @@ public class Map {
     int size = 15;
     String[][] map = new String[size][size];
 
-    private Boolean validatePos(int x, int y, int size){
+    private Boolean validatePos(int x, int y, int size){ // to check if array indexes go out of bounds
 
         if(x < 0 || y < 0 || x > size - 1 || y > size - 1){
             return false;
@@ -36,6 +36,8 @@ public class Map {
 
             if(map[randY][randX] == "--"){ //to check theres not village
                 
+                //check theres no village in adjacent
+
                 //x-1 y-1
                 if(validatePos(randX-1, randY-1, size) && adjacent == false) {
                     if(map[randY-1][randX-1] != "--"){
