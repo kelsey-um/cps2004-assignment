@@ -1,17 +1,22 @@
+// import java.util.ArrayList;
+
 public class Village {
     
-    //location coordinates
-    int locationX;
-    int locationY;
+    
     int health;
-    Resources resources;
-    Troops troops;
-    Buildings buildings;
+    // Resources resources;
+    // Troops troops;
+    
+    // ArrayList<Farm> farms = new ArrayList<Farm>();
+    // ArrayList<Lumbermill> lumbermills = new ArrayList<Lumbermill>();
+    // ArrayList<Forge> forges = new ArrayList<Forge>();
+    // ArrayList<Barracks> barracks = new ArrayList<Barracks>();
+    // ArrayList<ArcheryRange> archeryranges = new ArrayList<ArcheryRange>();
+    // ArrayList<Stables> stables = new ArrayList<Stables>();
 
-    public Village(int locationX, int locationY){
-        locationX = this.locationX;
-        locationY = this.locationY;
-        health = 100;
+
+    public Village(){
+        this.health = 100;
         //add constructors for resources troops and buildings
     }
 

@@ -1,5 +1,4 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main{
 
@@ -9,6 +8,7 @@ public class Main{
 
         int numberOfPlayers;
         int numberOfAI;
+        int totalPlayers;
 
         System.out.println("-- Village War Game --\n");
 
@@ -45,20 +45,50 @@ public class Main{
 
         HumanPlayer[] humanPlayerList = new HumanPlayer[numberOfPlayers];
         AIPlayer[] aiPlayerList = new AIPlayer[numberOfAI];
+        
+        totalPlayers = numberOfPlayers + numberOfAI;
+
+        //generating map
+        Map map = new Map();
+        ArrayList<Integer> locations = new ArrayList<Integer>();  //array to store coordinates
+        locations = map.initMap(totalPlayers);
 
         // declaring each player and their villages
         for (int i = 0 ; i < numberOfPlayers ; i++){
             System.out.println("\nEnter the name of player "+ (i+1)); //+1 so output is done properly
             String playerName = sc.next();
 
-            humanPlayerList[i] = new HumanPlayer(playerName);
+            int tempY = locations.remove(0);
+            int tempX = locations.remove(0);
+
+            humanPlayerList[i] = new HumanPlayer(playerName, tempX, tempY);
         }
 
         // creating ai players
         for(int i = 0 ; i < numberOfAI ; i++){ // i set to numberOfPlayers to keep proper count in array
             String playerName = "Computer " + (i+numberOfPlayers+1);
-            aiPlayerList[i] = new AIPlayer(playerName);
+
+            int tempY = locations.remove(0);
+            int tempX = locations.remove(0);
+
+            aiPlayerList[i] = new AIPlayer(playerName, tempX, tempY);
         }
+
+        map.printMap();
+
+        for(int i = 0 ; i < humanPlayerList.length ; i++){
+            System.out.println("\n\nName: " + humanPlayerList[i].playerName);
+            System.out.println("Location of village: ("+ humanPlayerList[i].locationX + ", "+ humanPlayerList[i].locationY + ")");
+        }
+
+        
+        for(int i = 0 ; i < aiPlayerList.length ; i++){
+            System.out.println("\n\nName: " + aiPlayerList[i].playerName);
+            System.out.println("Location of village: ("+ aiPlayerList[i].locationX + ", "+ aiPlayerList[i].locationY + ")");
+        }
+
+        System.out.println(locations.toString());
+        
 
 
         sc.close();
