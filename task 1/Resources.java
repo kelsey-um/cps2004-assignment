@@ -4,11 +4,20 @@ public class Resources {
     int metal;
 
     public Resources(){
-        this.food = 0;
-        this.wood = 0;
-        this.metal = 0;
+        this.food = 25;
+        this.wood = 20;
+        this.metal = 35;
     }
 
+    void displayResources(){ //display resources to the user
+        System.out.println("\nCurrent Resources:");
+
+        System.out.println("Food:  "+ food);
+        System.out.println("Wood:  " + wood);
+        System.out.println("Metal: "+ metal + "\n");
+    } 
+
+    // increase/decrease resources functions
     void increaseFood(int num){
         this.food += num;
     }

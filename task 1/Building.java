@@ -1,19 +1,45 @@
 class Building {
+    String type;
     byte level;
+
+    public Building(String type){
+        this.type = type;
+        this.level = 1;
+    }
 }
 
-interface ResourceGeneration{}
+class ResourceBuilding extends Building{
 
-interface TroopGeneration{}
+    public ResourceBuilding(String type){
+        super(type);
+    }
 
-class Farm extends Building implements ResourceGeneration{}
+    public void generateResource(Resources resources){
 
-class Lumbermill extends Building implements ResourceGeneration{}
+        if(type.equals("Farm")){
+          
+            resources.increaseFood(level*10);
+        
+        } else if (type.equals("Lumber Mill")){
+            
+            resources.increaseWood(level*10);
+        
+        } else if (type.equals("Forge")){
 
-class Forge extends Building implements ResourceGeneration{}
+            resources.increaseMetal(level*10);
+            
+        }
 
-class Barracks extends Building implements TroopGeneration{}
+    }
 
-class ArcheryRange extends Building implements TroopGeneration{}
+}
 
-class Stables extends Building implements TroopGeneration{}
+class TroopBuilding extends Building{
+
+    public TroopBuilding(String type){
+        super(type);
+    }
+
+
+
+}
