@@ -7,9 +7,9 @@ class Troops {
 
 }
 
-class Swordsmen extends Troops{
+class Swordsmen extends Troops {
 
-    public Swordsmen(){
+    public Swordsmen() {
         attack = 20;
         speed = 10;
         health = 30;
@@ -18,9 +18,9 @@ class Swordsmen extends Troops{
 
 }
 
-class Archers extends Troops{
-    
-    public Archers(){
+class Archers extends Troops {
+
+    public Archers() {
         attack = 10;
         speed = 10;
         health = 10;
@@ -29,15 +29,15 @@ class Archers extends Troops{
 
 }
 
-class Cavalry extends Troops{
+class Cavalry extends Troops {
 
-    public Cavalry(){
-    
+    public Cavalry() {
+
         attack = 30;
         speed = 30;
         health = 20;
         amount = 0;
-    
+
     }
 
 }
