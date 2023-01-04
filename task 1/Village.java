@@ -446,27 +446,10 @@ public class Village {
 
         int userChoice;
 
-        while (troopBuildingFound == false && buildings.size() > 0) { // to make sure there is one troop
-                                                                              // building, will not execute once a
-                                                                              // building has been found
-            for (int i = 0; i < buildings.size(); i++) {
-                if (buildings.get(i).getBuildingType().equals("Barracks")
-                        || buildings.get(i).getBuildingType().equals("Archery Range")
-                        || buildings.get(i).getBuildingType().equals("Stables")) {
-                    troopBuildingFound = true;
-                    break;
-                }
-            }
-        }
-
-        if (troopBuildingFound == true) {
-
-            System.out.println("What type of troop would you like to train?");
-
+        if(barracks != null && archeryRange != null && stables != null){ //to check there is at least one troop building
+        
         } else {
-
-            System.out.println("You don't have any buildings that can train troops!");
-
+            System.out.println("\nYou don't have any buildings to train your troops in!\n");
         }
 
     }

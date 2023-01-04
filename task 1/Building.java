@@ -35,17 +35,25 @@ class ResourceBuilding extends Building {
 
     public void generateResource(Resources resources) {
 
-        if (type.equals("Farm")) {
+        switch(type){
 
-            resources.increaseFood(level * 10);
+            case "Farm":{
+                resources.increaseFood(level * 10);
+                break;
+            }
 
-        } else if (type.equals("Lumber Mill")) {
+            case "Lumber Mill":{
+                resources.increaseWood(level * 10);
+                break;
+            }
 
-            resources.increaseWood(level * 10);
+            case "Forge":{
+                resources.increaseWood(level * 10);
+            }
 
-        } else if (type.equals("Forge")) {
-
-            resources.increaseMetal(level * 10);
+            default:{
+                System.out.println("This should never print");
+            }
 
         }
 
@@ -57,6 +65,38 @@ class TroopBuilding extends Building {
 
     public TroopBuilding(String type, int id) {
         super(type, id);
+    }
+
+    public void trainTroop(Resources resources, Troops troops, int numberToTrain){
+
+        switch(type){
+            
+            case "Barracks":{
+                troops.getSwordsmen().increaseAmount(numberToTrain);
+
+                resources.decreaseWood(20);
+                resources.decreaseFood(20);
+                resources.decreaseMetal(40);
+            }
+
+            case "Archery Range":{
+                troops.getArchers().increaseAmount(numberToTrain);
+                
+                resources.decreaseWood(30);
+                resources.decreaseFood(20);
+                resources.decreaseMetal(20);
+            }
+
+            case "Stables":{
+                troops.getCavalry().increaseAmount(numberToTrain);
+                
+                resources.decreaseWood(20);
+                resources.decreaseFood(40);
+                resources.decreaseMetal(30);
+            }
+
+        }
+
     }
 
 }

@@ -1,43 +1,25 @@
-class Troops {
-    protected int attack;
-    protected int speed;
-    protected int health;
+public class Troops {
+    
+    private Swordsmen swordsmen;
+    private Archers archers;
+    private Cavalry cavalry;
 
-    protected int amount;
-
-}
-
-class Swordsmen extends Troops {
-
-    public Swordsmen() {
-        attack = 20;
-        speed = 10;
-        health = 30;
-        amount = 0;
+    public Troops(){
+        this.swordsmen = new Swordsmen();
+        this.archers = new Archers();
+        this.cavalry = new Cavalry();
     }
 
-}
-
-class Archers extends Troops {
-
-    public Archers() {
-        attack = 10;
-        speed = 10;
-        health = 10;
-        amount = 0;
+    public Swordsmen getSwordsmen(){
+        return swordsmen;
     }
 
-}
+    public Archers getArchers(){
+        return archers;
+    }
 
-class Cavalry extends Troops {
-
-    public Cavalry() {
-
-        attack = 30;
-        speed = 30;
-        health = 20;
-        amount = 0;
-
+    public Cavalry getCavalry(){
+        return cavalry;
     }
 
 }
