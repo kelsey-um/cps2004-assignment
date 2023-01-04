@@ -6,7 +6,12 @@ public class Village {
     private Resources resources;
     private Troops troops;
 
-    private ArrayList<Building> buildings = new ArrayList<Building>();
+    private ArrayList<Building> resourceBuildings = new ArrayList<Building>();
+    private TroopBuilding barracks = null;
+    private TroopBuilding archeryRange = null;
+    private TroopBuilding stables = null;
+
+    private Boolean troopBuildingFound = false;
 
     public Village() {
         this.health = 100;
@@ -14,11 +19,11 @@ public class Village {
         this.resources = new Resources();
     }
 
-    public void printNumberedBuildings() {
-        for (int i = 0; i < buildings.size(); i++) {
+    private void printNumberedBuildings() {
+        for (int i = 0; i < resourceBuildings.size() ; i++) {
             System.out.println(
-                    (i + 1) + ". " + buildings.get(i).getBuildingType() + " " + buildings.get(i).getBuildingID());
-            System.out.println("Level: " + buildings.get(i).getBuildingLevel() + "\n");
+                    (i + 1) + ". " + resourceBuildings.get(i).getBuildingType() + " " + resourceBuildings.get(i).getBuildingID());
+            System.out.println("Level: " + resourceBuildings.get(i).getBuildingLevel() + "\n");
         }
     }
 
@@ -92,8 +97,8 @@ public class Village {
 
                             if (resources.getWood() >= 20 && resources.getFood() >= 20 && resources.getMetal() >= 10) {
 
-                                Building tempBuild = new Building("Farm", (buildings.size() + 1));
-                                buildings.add(tempBuild);
+                                Building tempBuild = new Building("Farm", (resourceBuildings.size() + 1));
+                                resourceBuildings.add(tempBuild);
 
                                 resources.decreaseWood(20);
                                 resources.decreaseFood(20);
@@ -116,8 +121,8 @@ public class Village {
 
                             if (resources.getWood() >= 20 && resources.getFood() >= 10 && resources.getMetal() >= 20) {
 
-                                Building tempBuild = new Building("Lumber Mill", (buildings.size() + 1));
-                                buildings.add(tempBuild);
+                                Building tempBuild = new Building("Lumber Mill", (resourceBuildings.size() + 1));
+                                resourceBuildings.add(tempBuild);
 
                                 resources.decreaseWood(20);
                                 resources.decreaseFood(10);
@@ -139,8 +144,8 @@ public class Village {
 
                             if (resources.getWood() >= 10 && resources.getFood() >= 10 && resources.getMetal() >= 40) {
 
-                                Building tempBuild = new Building("Forge", (buildings.size() + 1));
-                                buildings.add(tempBuild);
+                                Building tempBuild = new Building("Forge", (resourceBuildings.size() + 1));
+                                resourceBuildings.add(tempBuild);
 
                                 resources.decreaseWood(10);
                                 resources.decreaseFood(10);
@@ -213,8 +218,8 @@ public class Village {
 
                             if (resources.getWood() >= 20 && resources.getFood() >= 80 && resources.getMetal() >= 40) {
 
-                                Building tempBuild = new Building("Barracks", (buildings.size() + 1));
-                                buildings.add(tempBuild);
+                                Building tempBuild = new Building("Barracks", (resourceBuildings.size() + 1));
+                                resourceBuildings.add(tempBuild);
 
                                 resources.decreaseWood(20);
                                 resources.decreaseFood(80);
@@ -237,8 +242,8 @@ public class Village {
 
                             if (resources.getWood() >= 80 && resources.getFood() >= 40 && resources.getMetal() >= 20) {
 
-                                Building tempBuild = new Building("Archery Range", (buildings.size() + 1));
-                                buildings.add(tempBuild);
+                                Building tempBuild = new Building("Archery Range", (resourceBuildings.size() + 1));
+                                resourceBuildings.add(tempBuild);
 
                                 resources.decreaseWood(80);
                                 resources.decreaseFood(40);
@@ -260,8 +265,8 @@ public class Village {
 
                             if (resources.getWood() >= 80 && resources.getFood() >= 60 && resources.getMetal() >= 20) {
 
-                                Building tempBuild = new Building("Stables", (buildings.size() + 1));
-                                buildings.add(tempBuild);
+                                Building tempBuild = new Building("Stables", (resourceBuildings.size() + 1));
+                                resourceBuildings.add(tempBuild);
 
                                 resources.decreaseWood(80);
                                 resources.decreaseFood(60);
@@ -309,7 +314,7 @@ public class Village {
 
         int userChoice;
 
-        if (buildings.size() > 0) { // to check there are buildings
+        if (resourceBuildings.size() > 0) { // to check there are buildings
 
             System.out.println("\nUpgrade Costs:\n");
             System.out.println("Farm: \t\t10 wood 10 food  5 metal");
@@ -330,7 +335,7 @@ public class Village {
 
                     userChoice = sc.nextInt();
 
-                    if (userChoice < 1 || userChoice > (buildings.size() + 1)) {
+                    if (userChoice < 1 || userChoice > (resourceBuildings.size() + 1)) {
                         System.out.println("That is not a valid choice. Please try again.");
                     } else {
                         userChoice--; // since arraylist starts from 0
@@ -343,16 +348,16 @@ public class Village {
                 }
             }
 
-            if (buildings.get(userChoice).getBuildingLevel() < 5) { // check if building is at max level
+            if (resourceBuildings.get(userChoice).getBuildingLevel() < 5) { // check if building is at max level
 
-                String buildingType = buildings.get(userChoice).getBuildingType();
+                String buildingType = resourceBuildings.get(userChoice).getBuildingType();
 
                 switch (buildingType) {
                     case "Farm": {
 
                         if (resources.getWood() >= 10 && resources.getFood() >= 10 && resources.getMetal() >= 5) {
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                            resourceBuildings.get(userChoice).increaseLevel(); // increase level by 1
 
                             resources.decreaseWood(10); // decrease resources according to cost
                             resources.decreaseFood(10);
@@ -373,7 +378,7 @@ public class Village {
 
                         if (resources.getWood() >= 10 && resources.getFood() >= 5 && resources.getMetal() >= 10) {
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                            resourceBuildings.get(userChoice).increaseLevel(); // increase level by 1
 
                             resources.decreaseWood(10); // decrease resources according to cost
                             resources.decreaseFood(5);
@@ -394,7 +399,7 @@ public class Village {
 
                         if (resources.getWood() >= 5 && resources.getFood() >= 5 && resources.getMetal() >= 20) {
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                            resourceBuildings.get(userChoice).increaseLevel(); // increase level by 1
 
                             resources.decreaseWood(5); // decrease resources according to cost
                             resources.decreaseFood(5);
@@ -415,7 +420,7 @@ public class Village {
 
                         if (resources.getWood() >= 10 && resources.getFood() >= 40 && resources.getMetal() >= 10) {
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                            resourceBuildings.get(userChoice).increaseLevel(); // increase level by 1
 
                             resources.decreaseWood(10); // decrease resources according to cost
                             resources.decreaseFood(40);
@@ -436,7 +441,7 @@ public class Village {
 
                         if (resources.getWood() >= 40 && resources.getFood() >= 20 && resources.getMetal() >= 10) {
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                            resourceBuildings.get(userChoice).increaseLevel(); // increase level by 1
 
                             resources.decreaseWood(40); // decrease resources according to cost
                             resources.decreaseFood(20);
@@ -457,7 +462,7 @@ public class Village {
 
                         if (resources.getWood() >= 40 && resources.getFood() >= 30 && resources.getMetal() >= 10) {
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                            resourceBuildings.get(userChoice).increaseLevel(); // increase level by 1
 
                             resources.decreaseWood(40); // decrease resources according to cost
                             resources.decreaseFood(30);
@@ -488,4 +493,31 @@ public class Village {
 
         }
     }
+
+    public void trainTroops(Scanner sc) {
+
+        int userChoice;
+
+        while (troopBuildingFound == false && resourceBuildings.size() > 0){ //to make sure there is one troop building, will not execute once a building has been found
+            for (int i = 0 ; i < resourceBuildings.size() ; i++){
+                if(resourceBuildings.get(i).getBuildingType().equals("Barracks") || resourceBuildings.get(i).getBuildingType().equals("Archery Range") || resourceBuildings.get(i).getBuildingType().equals("Stables")){
+                    troopBuildingFound = true;
+                    break;
+                }
+            }
+        }
+
+        if(troopBuildingFound == true){
+
+            System.out.println("What type of troop would you like to train?");
+
+
+        } else {
+
+            System.out.println("You don't have any buildings that can train troops!");
+
+        }
+
+    }
+
 }

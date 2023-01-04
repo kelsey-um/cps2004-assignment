@@ -59,8 +59,4 @@ class TroopBuilding extends Building {
         super(type, id);
     }
 
-    public void trainTroops(Resources resources) {
-
-    }
-
 }
