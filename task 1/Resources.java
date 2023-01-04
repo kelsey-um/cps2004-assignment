@@ -1,15 +1,21 @@
 public class Resources {
-    int food;
-    int wood;
-    int metal;
+    private int food;
+    private int wood;
+    private int metal;
+
+    // public Resources(){ //every village starts with enough resources to build one of each resource generating buildings
+    //     this.food = 40;
+    //     this.wood = 50;
+    //     this.metal = 70;
+    // }
 
     public Resources(){
-        this.food = 25;
-        this.wood = 20;
-        this.metal = 35;
+        this.food = 10000;
+        this.wood = 10000;
+        this.metal = 10000;
     }
 
-    void displayResources(){ //display resources to the user
+    public void printResources(){ //display resources to the user
         System.out.println("\nCurrent Resources:");
 
         System.out.println("Food:  "+ food);
@@ -17,28 +23,41 @@ public class Resources {
         System.out.println("Metal: "+ metal + "\n");
     } 
 
-    // increase/decrease resources functions
-    void increaseFood(int num){
+    //get methods
+    public int getFood(){
+        return food;
+    }
+
+    public int getWood(){
+        return wood;
+    }
+
+    public int getMetal(){
+        return metal;
+    }
+
+    // increase/decrease resources methods
+    public void increaseFood(int num){
         this.food += num;
     }
     
-    void decreaseFood(int num){
+    public void decreaseFood(int num){
         this.food -= num;
     }
     
-    void increaseWood(int num){
+    public void increaseWood(int num){
         this.wood += num;
     }
     
-    void decreaseWood(int num){
+    public void decreaseWood(int num){
         this.wood -= num;
     }
     
-    void increaseMetal(int num){
+    public void increaseMetal(int num){
         this.metal += num;
     }
     
-    void decreaseMetal(int num){
+    public void decreaseMetal(int num){
         this.metal -= num;
     }
 }

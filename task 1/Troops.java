@@ -1,9 +1,9 @@
 class Troops {
-    int attack;
-    int speed;
-    int health;
+    protected int attack;
+    protected int speed;
+    protected int health;
 
-    int amount;
+    protected int amount;
 
 }
 

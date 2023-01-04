@@ -1,17 +1,36 @@
 class Building {
-    String type;
-    byte level;
+    protected String type;
+    protected int id;
+    protected byte level;
 
-    public Building(String type){
+    public Building(String type, int id){
+        this.id = id;
         this.type = type;
         this.level = 1;
+    }
+
+    public int getBuildingLevel(){
+        return level;
+    }
+
+    public String getBuildingType(){
+        return type;
+    }
+
+    public int getBuildingID(){
+        return id;
+    }
+
+    public void increaseLevel(){
+        level++;
     }
 }
 
 class ResourceBuilding extends Building{
 
-    public ResourceBuilding(String type){
-        super(type);
+    public ResourceBuilding(String type, int id){
+        super(type, id);
+
     }
 
     public void generateResource(Resources resources){
@@ -36,8 +55,14 @@ class ResourceBuilding extends Building{
 
 class TroopBuilding extends Building{
 
-    public TroopBuilding(String type){
-        super(type);
+    public TroopBuilding(String type, int id){
+        super(type, id);
+    }
+
+    public void trainTroops(Resources resources){
+
+
+
     }
 
 

@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Map {
-    int size = 15;
-    String[][] map = new String[size][size];
+    private int size = 15;
+    private String[][] map = new String[size][size];
 
     private Boolean validatePos(int x, int y, int size){ // to check if array indexes go out of bounds
 
@@ -101,7 +101,7 @@ public class Map {
                     i--;
                 }
             
-            } else {
+            } else { //village was not created
                 i--;
             }
 

@@ -1,12 +1,12 @@
 public class HumanPlayer{
     
-    byte playerID;
-    String playerName;
+    private byte playerID;
+    private String playerName;
 
     //location coordinates
-    int locationX;
-    int locationY;
-    Village village;
+    private int locationX;
+    private int locationY;
+    private Village village;
 
     public HumanPlayer(byte playerID, String playerName, int locationX, int locationY){
         this.playerID = playerID;
@@ -15,6 +15,10 @@ public class HumanPlayer{
         this.locationY = locationY;
         this.village = new Village();
     
+    }
+
+    Village getVillage(){
+        return village;
     }
 
 }
