@@ -4,10 +4,16 @@ public class Resources {
     private int metal;
 
     // public Resources(){ //every village starts with enough resources to build one
-    // of each resource generating buildings
+    // // of each resource generating buildings
     // this.food = 40;
     // this.wood = 50;
     // this.metal = 70;
+    // }
+
+    // public Resources(){
+    // this.food = 100;
+    // this.wood = 100;
+    // this.metal = 100;
     // }
 
     public Resources() {

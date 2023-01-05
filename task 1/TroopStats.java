@@ -5,11 +5,11 @@ class TroopStats {
 
     protected int amount;
 
-    public void increaseAmount(int num){
+    public void increaseAmount(int num) {
         amount += num;
     }
 
-    public void decreaseAmount(int num){
+    public void decreaseAmount(int num) {
         amount -= num;
     }
 

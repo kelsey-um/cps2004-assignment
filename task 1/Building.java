@@ -35,23 +35,23 @@ class ResourceBuilding extends Building {
 
     public void generateResource(Resources resources) {
 
-        switch(type){
+        switch (type) {
 
-            case "Farm":{
+            case "Farm": {
                 resources.increaseFood(level * 10);
                 break;
             }
 
-            case "Lumber Mill":{
+            case "Lumber Mill": {
                 resources.increaseWood(level * 10);
                 break;
             }
 
-            case "Forge":{
+            case "Forge": {
                 resources.increaseWood(level * 10);
             }
 
-            default:{
+            default: {
                 System.out.println("This should never print");
             }
 
@@ -67,11 +67,11 @@ class TroopBuilding extends Building {
         super(type, id);
     }
 
-    public void trainTroop(Resources resources, Troops troops, int numberToTrain){
+    public void trainTroop(Resources resources, Troops troops, int numberToTrain) {
 
-        switch(type){
-            
-            case "Barracks":{
+        switch (type) {
+
+            case "Barracks": {
                 troops.getSwordsmen().increaseAmount(numberToTrain);
 
                 resources.decreaseWood(20);
@@ -79,17 +79,17 @@ class TroopBuilding extends Building {
                 resources.decreaseMetal(40);
             }
 
-            case "Archery Range":{
+            case "Archery Range": {
                 troops.getArchers().increaseAmount(numberToTrain);
-                
+
                 resources.decreaseWood(30);
                 resources.decreaseFood(20);
                 resources.decreaseMetal(20);
             }
 
-            case "Stables":{
+            case "Stables": {
                 troops.getCavalry().increaseAmount(numberToTrain);
-                
+
                 resources.decreaseWood(20);
                 resources.decreaseFood(40);
                 resources.decreaseMetal(30);
