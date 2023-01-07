@@ -26,6 +26,10 @@ public class Village {
         }
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public void buildBuilding(Scanner sc) {
 
         int userChoice;
@@ -522,7 +526,7 @@ public class Village {
                                             resources.decreaseFood(10 * amountToTrain);
                                             resources.decreaseMetal(20 * amountToTrain);
 
-                                            troops.trainSwordsmen(amountToTrain);
+                                            troops.increaseSwordsmen(amountToTrain);
 
                                         } else {
                                             System.out
@@ -583,7 +587,7 @@ public class Village {
                                             resources.decreaseFood(20 * amountToTrain);
                                             resources.decreaseMetal(5 * amountToTrain);
 
-                                            troops.trainArchers(amountToTrain);
+                                            troops.increaseArchers(amountToTrain);
 
                                         } else {
                                             System.out
@@ -644,7 +648,7 @@ public class Village {
                                             resources.decreaseFood(40 * amountToTrain);
                                             resources.decreaseMetal(10 * amountToTrain);
 
-                                            troops.trainCavalry(amountToTrain);
+                                            troops.increaseCavalry(amountToTrain);
 
                                         } else {
                                             System.out
@@ -687,5 +691,166 @@ public class Village {
                 break outer_loop;
             }
         }
+    }
+
+    public Army createArmy(Scanner sc, HumanPlayer humanPlayerList[], AIPlayer aiPlayerList[], Player owner, Map map) {
+
+        int amount;
+        Army army = new Army();
+
+        System.out.println("Creating an army.");
+
+        System.out.println(
+                "How many swordsmen would you like to include? Available: " + troops.getSwordsmen().getAmount());
+
+        while (true) { // input loop
+            try {
+
+                amount = sc.nextInt();
+
+                if (amount < 0 || amount > troops.getSwordsmen().getAmount()) {
+                    System.out.println("Sorry, you don't have enough swordsmen to do that");
+                } else {
+
+                    System.out.println("You've added " + amount + " swordsmen to your army");
+
+                    army.increaseSwordsmen(amount);
+
+                    break;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be an integer. Please try again.");
+                sc.nextLine();
+            }
+        }
+
+        System.out.println("How many archers would you like to include? Availabe: " + troops.getArchers().getAmount());
+
+        while (true) { // input loop
+            try {
+
+                amount = sc.nextInt();
+
+                if (amount < 0 || amount > troops.getArchers().getAmount()) {
+                    System.out.println("Sorry, you don't have enough archers to do that");
+                } else {
+
+                    System.out.println("You've added " + amount + " archers to your army");
+
+                    army.increaseArchers(amount);
+
+                    break;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be an integer. Please try again.");
+                sc.nextLine();
+            }
+        }
+
+        System.out.println("How many cavalry would you like to include? Availabe: " + troops.getCavalry().getAmount());
+
+        while (true) { // input loop
+            try {
+
+                amount = sc.nextInt();
+
+                if (amount < 0 || amount > troops.getCavalry().getAmount()) {
+                    System.out.println("Sorry, you don't have enough cavalry to do that");
+                } else {
+
+                    System.out.println("You've added " + amount + " cavalry to your army");
+
+                    army.increaseCavalry(amount);
+
+                    break;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be an integer. Please try again.");
+                sc.nextLine();
+            }
+        }
+
+        System.out.println("Which player would you like to attack?");
+
+        for (int i = 0; i < humanPlayerList.length; i++) {
+
+            if (humanPlayerList[i].getVillage().getHealth() > 0) {
+
+                System.out.println((i + 1) + ". " + humanPlayerList[i]);
+
+            }
+
+        }
+
+        for (int i = 0; i < aiPlayerList.length; i++) {
+
+            if (aiPlayerList[i].getVillage().getHealth() > 0) {
+
+                System.out.println((i + humanPlayerList.length + 1) + ". " + aiPlayerList[i]);
+
+            }
+
+        }
+
+        Player chosenPlayer;
+        int userChoice;
+
+        while (true) { // input loop
+            try {
+
+                userChoice = sc.nextInt();
+
+                
+
+                if (userChoice < 0 || userChoice > (humanPlayerList.length + aiPlayerList.length)) {
+                    System.out.println("Sorry, that is not a valid choice");
+                } else {
+
+                    if (userChoice <= humanPlayerList.length) { // human player was chosen
+
+                        chosenPlayer = (HumanPlayer)humanPlayerList[userChoice];
+                        break;
+
+                    } else { // ai player was chosen
+
+                        chosenPlayer = (AIPlayer)aiPlayerList[(userChoice - humanPlayerList.length)];
+                        break;
+                    }
+
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be an integer. Please try again.");
+                sc.nextLine();
+            }
+        }
+
+        army.updateStats(chosenPlayer.getXCoordinate(), chosenPlayer.getYCoordinate(), owner, map);
+
+        System.out.println("Your army has been created");
+
+        return army;
+
+    }
+
+    public void resourceLoop(){
+
+        Building currentBuilding;
+
+        for(int i = 0 ; i < buildings.size() ; i++){
+
+            currentBuilding = buildings.get(i);
+
+            if(currentBuilding instanceof ResourceBuilding){
+                
+                ResourceBuilding currentResource = (ResourceBuilding) currentBuilding;
+                currentResource.generateResource(resources);
+            
+            }
+        }
+
     }
 }

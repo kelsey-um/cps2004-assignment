@@ -3,6 +3,8 @@ import java.util.*;
 public class Map {
     private int size = 15;
     private String[][] map = new String[size][size];
+    
+    private ArrayList<Army> armiesList = new ArrayList<Army>();
 
     private Boolean validatePos(int x, int y, int size) { // to check if array indexes go out of bounds
 
@@ -14,7 +16,7 @@ public class Map {
 
     }
 
-    ArrayList<Integer> initMap(int totalPlayers) {
+    public ArrayList<Integer> initMap(int totalPlayers) {
 
         Random rand = new Random();
 
@@ -110,7 +112,7 @@ public class Map {
         return locations; // returning arraylist with coordinates
     }
 
-    void printMap() {
+    public void printMap() {
 
         // corner
         System.out.print("--  ");
@@ -142,6 +144,19 @@ public class Map {
             System.out.println();
         }
 
+    }
+
+    public void addArmy(Army army){ //add army to map
+
+        armiesList.add(army);
+
+        //update string
+        // map[army.getCurrentY()][army.getCurrentX()] += "A" + army.getOwner().getPlayerID();
+
+    }
+
+    public void traverseArmies(){
+        
     }
 
 }

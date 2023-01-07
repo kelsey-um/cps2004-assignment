@@ -74,19 +74,56 @@ public class Main {
             aiPlayerList[i] = new AIPlayer(tempID, playerName, tempX, tempY);
         }
 
-        map.printMap();
+        int villagesLeft = totalPlayers;
 
-        // for(int i = 0 ; i < humanPlayerList.length ; i++){
-        // System.out.println("\n\nName: " + humanPlayerList[i].playerName);
-        // System.out.println("Location of village: ("+ humanPlayerList[i].locationX +
-        // ", "+ humanPlayerList[i].locationY + ")");
-        // }
+        // game loop
 
-        // for(int i = 0 ; i < aiPlayerList.length ; i++){
-        // System.out.println("\n\nName: " + aiPlayerList[i].playerName);
-        // System.out.println("Location of village: ("+ aiPlayerList[i].locationX + ",
-        // "+ aiPlayerList[i].locationY + ")");
-        // }
+        while (villagesLeft > 1) { // win condition check
+
+            // loop for each player to take turn
+
+            // human players
+            for (int i = 0; i < humanPlayerList.length; i++) {
+                HumanPlayer currentPlayer = humanPlayerList[i];
+
+                if (currentPlayer.getVillage().getHealth() > 0) { // to check village is not destoryed
+                    // friendly troop arrival
+
+                    // enemy troop arrival
+
+                    // resource earning
+                    currentPlayer.getVillage().resourceLoop();
+
+                    // player actions
+                }
+
+            }
+
+            // ai players
+
+            for (int i = 0; i < aiPlayerList.length; i++) {
+
+                AIPlayer currentPlayer = aiPlayerList[i];
+
+                if (currentPlayer.getVillage().getHealth() > 0) {
+
+                    // friendly troop arrival
+
+                    // enemy troop arrival
+
+                    // resource earning
+                    currentPlayer.getVillage().resourceLoop();
+
+                    // player actions
+
+                }
+
+            }
+
+            // marching
+            map.traverseArmies();
+
+        }
 
         sc.close();
     }
