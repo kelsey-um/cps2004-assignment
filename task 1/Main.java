@@ -7,8 +7,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int numberOfPlayers;
-        int numberOfAI;
-        int totalPlayers;
 
         System.out.println("-- Village War Game --\n");
 
@@ -29,27 +27,24 @@ public class Main {
             }
         }
 
-        // number of ai players input
-        System.out.println("\nEnter number of AI players");
-        while (true) { // loop to allow user to try again
-            try {
-                numberOfAI = sc.nextInt();
-                break;
-            } catch (InputMismatchException e) { // catch non-integes
-                System.out.println("Input must be an integer. Please try again.");
-                sc.nextLine(); // skip line
-            }
-        }
+        // // number of ai players input
+        // System.out.println("\nEnter number of AI players");
+        // while (true) { // loop to allow user to try again
+        //     try {
+        //         numberOfAI = sc.nextInt();
+        //         break;
+        //     } catch (InputMismatchException e) { // catch non-integes
+        //         System.out.println("Input must be an integer. Please try again.");
+        //         sc.nextLine(); // skip line
+        //     }
+        // }
 
         HumanPlayer[] humanPlayerList = new HumanPlayer[numberOfPlayers];
-        AIPlayer[] aiPlayerList = new AIPlayer[numberOfAI];
-
-        totalPlayers = numberOfPlayers + numberOfAI;
 
         // generating map
         Map map = new Map();
         ArrayList<Integer> locations = new ArrayList<Integer>(); // array to store coordinates
-        locations = map.initMap(totalPlayers);
+        locations = map.initMap(numberOfPlayers);
 
         // declaring each player and their villages
         for (int i = 0; i < numberOfPlayers; i++) {
@@ -63,18 +58,18 @@ public class Main {
             humanPlayerList[i] = new HumanPlayer(tempID, playerName, tempX, tempY);
         }
 
-        // creating ai players
-        for (int i = 0; i < numberOfAI; i++) { // i set to numberOfPlayers to keep proper count in array
-            String playerName = "Computer " + (i + numberOfPlayers + 1);
+        // // creating ai players
+        // for (int i = 0; i < numberOfAI; i++) { // i set to numberOfPlayers to keep proper count in array
+        //     String playerName = "Computer " + (i + numberOfPlayers + 1);
 
-            int tempY = locations.remove(0);
-            int tempX = locations.remove(0);
-            byte tempID = (byte) (i + 1);
+        //     int tempY = locations.remove(0);
+        //     int tempX = locations.remove(0);
+        //     byte tempID = (byte) (i + 1);
 
-            aiPlayerList[i] = new AIPlayer(tempID, playerName, tempX, tempY);
-        }
+        //     aiPlayerList[i] = new AIPlayer(tempID, playerName, tempX, tempY);
+        // }
 
-        int villagesLeft = totalPlayers;
+        int villagesLeft = numberOfPlayers;
 
         // game loop
 
@@ -99,26 +94,6 @@ public class Main {
 
             }
 
-            // ai players
-
-            for (int i = 0; i < aiPlayerList.length; i++) {
-
-                AIPlayer currentPlayer = aiPlayerList[i];
-
-                if (currentPlayer.getVillage().getHealth() > 0) {
-
-                    // friendly troop arrival
-
-                    // enemy troop arrival
-
-                    // resource earning
-                    currentPlayer.getVillage().resourceLoop();
-
-                    // player actions
-
-                }
-
-            }
 
             // marching
             map.traverseArmies();
