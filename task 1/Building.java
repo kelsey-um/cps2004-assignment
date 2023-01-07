@@ -1,7 +1,7 @@
 class Building {
     protected String type;
     protected int id;
-    protected byte level;
+    protected int level;
 
     public Building(String type, int id) {
         this.id = id;
@@ -48,7 +48,8 @@ class ResourceBuilding extends Building {
             }
 
             case "Forge": {
-                resources.increaseWood(level * 10);
+                resources.increaseMetal(level * 10);
+                break;
             }
 
             default: {

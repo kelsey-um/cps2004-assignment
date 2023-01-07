@@ -26,7 +26,7 @@ public class Troops {
         swordsmen.increaseAmount(amount);
     }
 
-    public void decreaseSwordsmen(int amount){
+    public void decreaseSwordsmen(int amount) {
         swordsmen.decreaseAmount(amount);
     }
 
@@ -34,7 +34,7 @@ public class Troops {
         archers.increaseAmount(amount);
     }
 
-    public void decreaseArchers(int amount){
+    public void decreaseArchers(int amount) {
         archers.decreaseAmount(amount);
     }
 
@@ -42,12 +42,12 @@ public class Troops {
         cavalry.increaseAmount(amount);
     }
 
-    public void decreaseCavalry(int amount){
+    public void decreaseCavalry(int amount) {
         cavalry.decreaseAmount(amount);
     }
 }
 
-class Army extends Troops{
+class Army extends Troops {
 
     private int totalAttack;
     private int totalHealth;
@@ -56,60 +56,76 @@ class Army extends Troops{
 
     private Player owner;
 
-    //current location
+    // current location
     private int currentX;
     private int currentY;
-    
-    //coordinates of village to attack
-    private int attackX;
-    private int attackY;
 
-    public Army(){
+    // coordinates of village to attack
+    private int targetX;
+    private int targetY;
+
+    public Army() {
 
         this.totalAttack = 0;
         this.totalHealth = 0;
         this.carryingCapacity = 0;
         this.marchingSpeed = 0;
-        
+
     }
 
-    public int getCurrentX(){
+    public int getCurrentX() {
         return currentX;
     }
 
-    public int getCurrentY(){
+    public int getCurrentY() {
         return currentY;
     }
 
-    public int getAttackX(){
-        return attackX;
+    public void setCurrentX(int currentX) {
+        this.currentX = currentX;
     }
 
-    public int getAttackY(){
-        return attackY;
+    public void setCurrentY(int currentY) {
+        this.currentY = currentY;
     }
 
-    public Player getOwner(){
+    public int getTargetX() {
+        return targetX;
+    }
+
+    public int getTargetY() {
+        return targetY;
+    }
+
+    public Player getOwner() {
         return owner;
     }
 
-    public void updateStats(int attackX , int attackY, Player owner, Map map){
-        this.totalAttack = (swordsmen.getAmount() * swordsmen.getAttack()) + (archers.getAmount() * archers.getAttack()) + (cavalry.getAmount() * cavalry.getAttack());
+    public int getSpeed() {
+        return marchingSpeed;
+    }
 
-        this.totalHealth = (swordsmen.getAmount() * swordsmen.getHealth()) + (archers.getAmount() * archers.getHealth()) + (cavalry.getAmount() * cavalry.getHealth());
+    public void updateStats(int attackX, int attackY, Player owner, Map map) {
+        this.totalAttack = (swordsmen.getAmount() * swordsmen.getAttack()) + (archers.getAmount() * archers.getAttack())
+                + (cavalry.getAmount() * cavalry.getAttack());
 
-        this.carryingCapacity = (swordsmen.getAmount() * swordsmen.getCarryingCapacity()) + (archers.getAmount() * archers.getCarryingCapacity()) + (cavalry.getAmount() * cavalry.getCarryingCapacity());
+        this.totalHealth = (swordsmen.getAmount() * swordsmen.getHealth()) + (archers.getAmount() * archers.getHealth())
+                + (cavalry.getAmount() * cavalry.getHealth());
 
-        if(cavalry.getAmount() > 0){
+        this.carryingCapacity = (swordsmen.getAmount() * swordsmen.getCarryingCapacity())
+                + (archers.getAmount() * archers.getCarryingCapacity())
+                + (cavalry.getAmount() * cavalry.getCarryingCapacity());
+
+        if (cavalry.getAmount() > 0) {
             this.marchingSpeed = cavalry.getSpeed();
-        } else if (archers.getAmount() > 0){
+        } else if (archers.getAmount() > 0) {
             this.marchingSpeed = archers.getSpeed();
-        } else if (swordsmen.getAmount() > 0){
+        } else if (swordsmen.getAmount() > 0) {
             this.marchingSpeed = swordsmen.getSpeed();
         }
-    
-        this.attackX = attackX;
-        this.attackY = attackY;
+
+        this.targetX = attackX;
+        this.targetY = attackY;
 
         this.owner = owner;
 
@@ -117,7 +133,6 @@ class Army extends Troops{
         this.currentY = owner.getYCoordinate();
 
         map.addArmy(this);
-
 
     }
 

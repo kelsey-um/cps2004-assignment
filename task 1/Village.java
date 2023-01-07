@@ -30,6 +30,10 @@ public class Village {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public void buildBuilding(Scanner sc) {
 
         int userChoice;
@@ -98,15 +102,13 @@ public class Village {
 
                         System.out.println("\nYou have successfully built a new farm!");
 
-                        break outer_loop;
-
                     } else {
 
-                        System.out.println("Sorry, you don't have enough resources to do that.");
+                        System.out.println("\nSorry, you don't have enough resources to do that.");
 
                     }
 
-                    break;
+                    break outer_loop;
                 }
 
                 case 2: { // lumber mill
@@ -122,13 +124,13 @@ public class Village {
 
                         System.out.println("\nYou have successfully built a new lumber mill!");
 
-                        break outer_loop;
-
                     } else {
 
                         System.out.println("\nSorry, you don't have enough resources to do that.");
 
                     }
+
+                    break outer_loop;
 
                 }
 
@@ -143,17 +145,15 @@ public class Village {
                         resources.decreaseFood(10);
                         resources.decreaseMetal(40);
 
-                        System.out.println("You have successfully built a new forge!");
-
-                        break outer_loop;
+                        System.out.println("\nYou have successfully built a new forge!");
 
                     } else {
 
-                        System.out.println("Sorry, you don't have enough resources to do that.");
+                        System.out.println("\nSorry, you don't have enough resources to do that.");
 
                     }
 
-                    break;
+                    break outer_loop;
                 }
 
                 case 4: { // barracks
@@ -169,20 +169,17 @@ public class Village {
 
                             System.out.println("\nYou have successfully built the barracks!");
 
-                            break outer_loop;
-
                         } else {
 
-                            System.out.println("Sorry, you don't have enough resources to do that.\n");
+                            System.out.println("\nSorry, you don't have enough resources to do that.");
 
                         }
                     } else {
-                        System.out.println("The barracks have already been built!\n");
+                        System.out.println("\nThe barracks have already been built!");
 
-                        break outer_loop;
                     }
 
-                    break;
+                    break outer_loop;
                 }
 
                 case 5: { // archery range
@@ -198,20 +195,17 @@ public class Village {
 
                             System.out.println("\nYou have successfully built the archery range!");
 
-                            break outer_loop;
-
                         } else {
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.\n");
+                            System.out.println("\nSorry, you don't have enough resources to do that.");
 
                         }
                     } else {
-                        System.out.println("The archery range has already been built!\n");
+                        System.out.println("\nThe archery range has already been built!");
 
-                        break outer_loop;
                     }
 
-                    break;
+                    break outer_loop;
                 }
 
                 case 6: { // stables
@@ -225,24 +219,20 @@ public class Village {
                             resources.decreaseFood(60);
                             resources.decreaseMetal(20);
 
-                            System.out.println("You have successfully built the stables!");
-
-                            break outer_loop;
+                            System.out.println("\nYou have successfully built the stables!");
 
                         } else {
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.\n");
+                            System.out.println("\nSorry, you don't have enough resources to do that.");
 
                         }
                     } else {
 
-                        System.out.println("The stables have already been built!\n");
-
-                        break outer_loop;
+                        System.out.println("\nThe stables have already been built!");
 
                     }
 
-                    break;
+                    break outer_loop;
                 }
 
                 case 0: { // back
@@ -278,16 +268,17 @@ public class Village {
             System.out.println("Which building would you like to upgrade?\n");
 
             printNumberedBuildings();
+            System.out.println("0. Back");
 
             while (true) { // input loop
                 try {
 
                     userChoice = sc.nextInt();
 
-                    if (userChoice < 1 || userChoice > (buildings.size() + 1)) {
+                    if (userChoice < 0 || userChoice > (buildings.size() + 1)) {
                         System.out.println("That is not a valid choice. Please try again.");
                     } else {
-                        userChoice--; // since arraylist starts from 0
+
                         break;
                     }
 
@@ -297,149 +288,154 @@ public class Village {
                 }
             }
 
-            if (buildings.get(userChoice).getBuildingLevel() < 5) { // check if building is at max level
+            if (userChoice != 0) {
 
-                String buildingType = buildings.get(userChoice).getBuildingType();
+                userChoice--; // since arraylist starts from 0
 
-                switch (buildingType) {
-                    case "Farm": {
+                if (buildings.get(userChoice).getBuildingLevel() < 5) { // check if building is at max level
 
-                        if (resources.getWood() >= 10 && resources.getFood() >= 10 && resources.getMetal() >= 5) {
+                    String buildingType = buildings.get(userChoice).getBuildingType();
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                    switch (buildingType) {
+                        case "Farm": {
 
-                            resources.decreaseWood(10); // decrease resources according to cost
-                            resources.decreaseFood(10);
-                            resources.decreaseMetal(5);
+                            if (resources.getWood() >= 10 && resources.getFood() >= 10 && resources.getMetal() >= 5) {
 
-                            System.out.println("\nYou have successfully upgraded your farm!");
+                                buildings.get(userChoice).increaseLevel(); // increase level by 1
 
-                        } else {
+                                resources.decreaseWood(10); // decrease resources according to cost
+                                resources.decreaseFood(10);
+                                resources.decreaseMetal(5);
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.");
+                                System.out.println("\nYou have successfully upgraded your farm!");
 
+                            } else {
+
+                                System.out.println("\nSorry, you don't have enough resources to do that.");
+
+                            }
+
+                            break;
                         }
 
-                        break;
-                    }
+                        case "Lumber Mill": {
 
-                    case "Lumber Mill": {
+                            if (resources.getWood() >= 10 && resources.getFood() >= 5 && resources.getMetal() >= 10) {
 
-                        if (resources.getWood() >= 10 && resources.getFood() >= 5 && resources.getMetal() >= 10) {
+                                buildings.get(userChoice).increaseLevel(); // increase level by 1
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                                resources.decreaseWood(10); // decrease resources according to cost
+                                resources.decreaseFood(5);
+                                resources.decreaseMetal(10);
 
-                            resources.decreaseWood(10); // decrease resources according to cost
-                            resources.decreaseFood(5);
-                            resources.decreaseMetal(10);
+                                System.out.println("\nYou have successfully upgraded your lumber mill!");
 
-                            System.out.println("\nYou have successfully upgraded your lumber mill!");
+                            } else {
 
-                        } else {
+                                System.out.println("\nSorry, you don't have enough resources to do that.");
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.");
+                            }
 
+                            break;
                         }
 
-                        break;
-                    }
+                        case "Forge": {
 
-                    case "Forge": {
+                            if (resources.getWood() >= 5 && resources.getFood() >= 5 && resources.getMetal() >= 20) {
 
-                        if (resources.getWood() >= 5 && resources.getFood() >= 5 && resources.getMetal() >= 20) {
+                                buildings.get(userChoice).increaseLevel(); // increase level by 1
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                                resources.decreaseWood(5); // decrease resources according to cost
+                                resources.decreaseFood(5);
+                                resources.decreaseMetal(20);
 
-                            resources.decreaseWood(5); // decrease resources according to cost
-                            resources.decreaseFood(5);
-                            resources.decreaseMetal(20);
+                                System.out.println("\nYou have successfully upgraded your forge!");
 
-                            System.out.println("\nYou have successfully upgraded your forge!");
+                            } else {
 
-                        } else {
+                                System.out.println("\nSorry, you don't have enough resources to do that.");
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.");
+                            }
 
+                            break;
                         }
 
-                        break;
-                    }
+                        case "Barracks": {
 
-                    case "Barracks": {
+                            if (resources.getWood() >= 10 && resources.getFood() >= 40 && resources.getMetal() >= 10) {
 
-                        if (resources.getWood() >= 10 && resources.getFood() >= 40 && resources.getMetal() >= 10) {
+                                buildings.get(userChoice).increaseLevel(); // increase level by 1
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                                resources.decreaseWood(10); // decrease resources according to cost
+                                resources.decreaseFood(40);
+                                resources.decreaseMetal(10);
 
-                            resources.decreaseWood(10); // decrease resources according to cost
-                            resources.decreaseFood(40);
-                            resources.decreaseMetal(10);
+                                System.out.println("\nYou have successfully upgraded your barracks!");
 
-                            System.out.println("\nYou have successfully upgraded your barracks!");
+                            } else {
 
-                        } else {
+                                System.out.println("\nSorry, you don't have enough resources to do that.");
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.");
+                            }
 
+                            break;
                         }
 
-                        break;
-                    }
+                        case "Archery Range": {
 
-                    case "Archery Range": {
+                            if (resources.getWood() >= 40 && resources.getFood() >= 20 && resources.getMetal() >= 10) {
 
-                        if (resources.getWood() >= 40 && resources.getFood() >= 20 && resources.getMetal() >= 10) {
+                                buildings.get(userChoice).increaseLevel(); // increase level by 1
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                                resources.decreaseWood(40); // decrease resources according to cost
+                                resources.decreaseFood(20);
+                                resources.decreaseMetal(10);
 
-                            resources.decreaseWood(40); // decrease resources according to cost
-                            resources.decreaseFood(20);
-                            resources.decreaseMetal(10);
+                                System.out.println("\nYou have successfully upgraded your archery range!");
 
-                            System.out.println("\nYou have successfully upgraded your archery range!");
+                            } else {
 
-                        } else {
+                                System.out.println("\nSorry, you don't have enough resources to do that.");
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.");
+                            }
 
+                            break;
                         }
 
-                        break;
-                    }
+                        case "Stables": {
 
-                    case "Stables": {
+                            if (resources.getWood() >= 40 && resources.getFood() >= 30 && resources.getMetal() >= 10) {
 
-                        if (resources.getWood() >= 40 && resources.getFood() >= 30 && resources.getMetal() >= 10) {
+                                buildings.get(userChoice).increaseLevel(); // increase level by 1
 
-                            buildings.get(userChoice).increaseLevel(); // increase level by 1
+                                resources.decreaseWood(40); // decrease resources according to cost
+                                resources.decreaseFood(30);
+                                resources.decreaseMetal(10);
 
-                            resources.decreaseWood(40); // decrease resources according to cost
-                            resources.decreaseFood(30);
-                            resources.decreaseMetal(10);
+                                System.out.println("\nYou have successfully upgraded your stables!");
 
-                            System.out.println("\nYou have successfully upgraded your stables!");
+                            } else {
 
-                        } else {
+                                System.out.println("\nSorry, you don't have enough resources to do that.");
 
-                            System.out.println("\nSorry, you don't have enough resources to do that.");
+                            }
 
+                            break;
                         }
 
-                        break;
+                        default: {
+                            System.out.println("This should never print");
+                        }
                     }
 
-                    default: {
-                        System.out.println("This should never print");
-                    }
+                } else {
+                    System.out.println("This building is already at its max level!");
                 }
-
             } else {
-                System.out.println("This building is already at its max level!");
+
+                System.out.println("You currently don't have any buildings in your village!");
+
             }
-        } else {
-
-            System.out.println("You currently don't have any buildings in your village!");
-
         }
     }
 
@@ -520,7 +516,7 @@ public class Village {
                                                 && resources.getMetal() >= (20 * amountToTrain)) {
 
                                             System.out.println("\nYou have successfully trained " + amountToTrain
-                                                    + " swordsmen.\n");
+                                                    + " swordsmen.");
 
                                             resources.decreaseWood(10 * amountToTrain);
                                             resources.decreaseFood(10 * amountToTrain);
@@ -530,7 +526,7 @@ public class Village {
 
                                         } else {
                                             System.out
-                                                    .println("\nSorry, you don't have enough resources to do that.\n");
+                                                    .println("\nSorry, you don't have enough resources to do that.");
 
                                         }
 
@@ -581,7 +577,7 @@ public class Village {
                                                 && resources.getMetal() >= (5 * amountToTrain)) {
 
                                             System.out.println(
-                                                    "\nYou have successfully trained " + amountToTrain + " archers.\n");
+                                                    "\nYou have successfully trained " + amountToTrain + " archers.");
 
                                             resources.decreaseWood(10 * amountToTrain);
                                             resources.decreaseFood(20 * amountToTrain);
@@ -591,7 +587,7 @@ public class Village {
 
                                         } else {
                                             System.out
-                                                    .println("\nSorry, you don't have enough resources to do that.\n");
+                                                    .println("\nSorry, you don't have enough resources to do that.");
 
                                         }
 
@@ -642,7 +638,7 @@ public class Village {
                                                 && resources.getMetal() >= (10 * amountToTrain)) {
 
                                             System.out.println(
-                                                    "\nYou have successfully trained " + amountToTrain + " cavalry.\n");
+                                                    "\nYou have successfully trained " + amountToTrain + " cavalry.");
 
                                             resources.decreaseWood(10 * amountToTrain);
                                             resources.decreaseFood(40 * amountToTrain);
@@ -693,12 +689,12 @@ public class Village {
         }
     }
 
-    public Army createArmy(Scanner sc, HumanPlayer humanPlayerList[], AIPlayer aiPlayerList[], Player owner, Map map) {
+    public void createArmy(Scanner sc, HumanPlayer humanPlayerList[], Player owner, Map map) {
 
         int amount;
         Army army = new Army();
 
-        System.out.println("Creating an army.");
+        System.out.println("Creating an army.\n");
 
         System.out.println(
                 "How many swordsmen would you like to include? Available: " + troops.getSwordsmen().getAmount());
@@ -709,10 +705,10 @@ public class Village {
                 amount = sc.nextInt();
 
                 if (amount < 0 || amount > troops.getSwordsmen().getAmount()) {
-                    System.out.println("Sorry, you don't have enough swordsmen to do that");
+                    System.out.println("\nSorry, you don't have enough swordsmen to do that");
                 } else {
 
-                    System.out.println("You've added " + amount + " swordsmen to your army");
+                    System.out.println("\nYou've added " + amount + " swordsmen to your army");
 
                     army.increaseSwordsmen(amount);
 
@@ -725,7 +721,8 @@ public class Village {
             }
         }
 
-        System.out.println("How many archers would you like to include? Availabe: " + troops.getArchers().getAmount());
+        System.out
+                .println("\nHow many archers would you like to include? Availabe: " + troops.getArchers().getAmount());
 
         while (true) { // input loop
             try {
@@ -733,10 +730,10 @@ public class Village {
                 amount = sc.nextInt();
 
                 if (amount < 0 || amount > troops.getArchers().getAmount()) {
-                    System.out.println("Sorry, you don't have enough archers to do that");
+                    System.out.println("\nSorry, you don't have enough archers to do that");
                 } else {
 
-                    System.out.println("You've added " + amount + " archers to your army");
+                    System.out.println("\nYou've added " + amount + " archers to your army");
 
                     army.increaseArchers(amount);
 
@@ -749,7 +746,8 @@ public class Village {
             }
         }
 
-        System.out.println("How many cavalry would you like to include? Availabe: " + troops.getCavalry().getAmount());
+        System.out
+                .println("\nHow many cavalry would you like to include? Availabe: " + troops.getCavalry().getAmount());
 
         while (true) { // input loop
             try {
@@ -757,10 +755,10 @@ public class Village {
                 amount = sc.nextInt();
 
                 if (amount < 0 || amount > troops.getCavalry().getAmount()) {
-                    System.out.println("Sorry, you don't have enough cavalry to do that");
+                    System.out.println("\nSorry, you don't have enough cavalry to do that");
                 } else {
 
-                    System.out.println("You've added " + amount + " cavalry to your army");
+                    System.out.println("\nYou've added " + amount + " cavalry to your army");
 
                     army.increaseCavalry(amount);
 
@@ -773,23 +771,14 @@ public class Village {
             }
         }
 
-        System.out.println("Which player would you like to attack?");
+        System.out.println("\nWhich player would you like to attack?");
 
         for (int i = 0; i < humanPlayerList.length; i++) {
 
-            if (humanPlayerList[i].getVillage().getHealth() > 0) {
+            if (humanPlayerList[i].getVillage().getHealth() > 0
+                    && !(humanPlayerList[i].getPlayerID() == owner.getPlayerID())) {
 
-                System.out.println((i + 1) + ". " + humanPlayerList[i]);
-
-            }
-
-        }
-
-        for (int i = 0; i < aiPlayerList.length; i++) {
-
-            if (aiPlayerList[i].getVillage().getHealth() > 0) {
-
-                System.out.println((i + humanPlayerList.length + 1) + ". " + aiPlayerList[i]);
+                System.out.println((i + 1) + ". " + humanPlayerList[i].getPlayerName());
 
             }
 
@@ -803,22 +792,12 @@ public class Village {
 
                 userChoice = sc.nextInt();
 
-                
-
-                if (userChoice < 0 || userChoice > (humanPlayerList.length + aiPlayerList.length)) {
+                if (userChoice < 0 || userChoice > humanPlayerList.length || userChoice == owner.getPlayerID()) {
                     System.out.println("Sorry, that is not a valid choice");
                 } else {
 
-                    if (userChoice <= humanPlayerList.length) { // human player was chosen
-
-                        chosenPlayer = (HumanPlayer)humanPlayerList[userChoice];
-                        break;
-
-                    } else { // ai player was chosen
-
-                        chosenPlayer = (AIPlayer)aiPlayerList[(userChoice - humanPlayerList.length)];
-                        break;
-                    }
+                    chosenPlayer = (HumanPlayer) humanPlayerList[userChoice - 1];
+                    break;
 
                 }
 
@@ -830,25 +809,23 @@ public class Village {
 
         army.updateStats(chosenPlayer.getXCoordinate(), chosenPlayer.getYCoordinate(), owner, map);
 
-        System.out.println("Your army has been created");
-
-        return army;
+        System.out.println("\nYour army has been created");
 
     }
 
-    public void resourceLoop(){
+    public void resourceLoop() {
 
         Building currentBuilding;
 
-        for(int i = 0 ; i < buildings.size() ; i++){
+        for (int i = 0; i < buildings.size(); i++) {
 
             currentBuilding = buildings.get(i);
 
-            if(currentBuilding instanceof ResourceBuilding){
-                
+            if (currentBuilding instanceof ResourceBuilding) {
+
                 ResourceBuilding currentResource = (ResourceBuilding) currentBuilding;
                 currentResource.generateResource(resources);
-            
+
             }
         }
 

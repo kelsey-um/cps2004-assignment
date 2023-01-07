@@ -6,23 +6,23 @@ class TroopStats {
 
     protected int amount;
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
-    public int getAttack(){
+    public int getAttack() {
         return attack;
     }
 
-    public int getSpeed(){
+    public int getSpeed() {
         return speed;
     }
 
-    public int getHealth(){
+    public int getHealth() {
         return health;
     }
 
-    public int getCarryingCapacity(){
+    public int getCarryingCapacity() {
         return carryingCapacity;
     }
 

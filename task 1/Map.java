@@ -3,7 +3,7 @@ import java.util.*;
 public class Map {
     private int size = 15;
     private String[][] map = new String[size][size];
-    
+
     private ArrayList<Army> armiesList = new ArrayList<Army>();
 
     private Boolean validatePos(int x, int y, int size) { // to check if array indexes go out of bounds
@@ -13,6 +13,33 @@ public class Map {
         }
 
         return true;
+
+    }
+
+    private void updateMapString(int newX, int newY, int oldX, int oldY, int id) {
+
+        String army = "A" + id;
+
+        String cell = map[oldY][oldX];
+
+        cell = cell.replaceFirst(army, "");
+        map[oldY][oldX] = cell;
+
+        if (map[oldY][oldX].isEmpty()) {
+
+            map[oldY][oldX] = "--";
+
+        }
+
+        if (map[newY][newX] == "--") {
+
+            map[newY][newX] = army;
+
+        } else {
+
+            map[newY][newX] += army;
+
+        }
 
     }
 
@@ -146,17 +173,109 @@ public class Map {
 
     }
 
-    public void addArmy(Army army){ //add army to map
+    public void addArmy(Army army) { // add army to map
 
         armiesList.add(army);
 
-        //update string
-        // map[army.getCurrentY()][army.getCurrentX()] += "A" + army.getOwner().getPlayerID();
+        // update string
+        // map[army.getCurrentY()][army.getCurrentX()] += "A" +
+        // army.getOwner().getPlayerID();
 
     }
 
-    public void traverseArmies(){
-        
+    public void traverseArmies() {
+
+        System.out.println("traversing");
+
+        for (int i = 0; i < armiesList.size(); i++) {
+
+            Army currentArmy = armiesList.get(i);
+            int ownerID = currentArmy.getOwner().getPlayerID();
+
+            int targetX = currentArmy.getTargetX();
+            int targetY = currentArmy.getTargetY();
+
+            int oldX = currentArmy.getCurrentX();
+            int oldY = currentArmy.getCurrentY();
+
+            int newX = oldX;
+            int newY = oldY;
+
+            int speed = currentArmy.getSpeed();
+
+            if (oldX != targetX) { // if x is not same
+
+                if (oldX > targetX) { // if current is larger than target
+
+                    if ((oldX - targetX) < speed) { // if army is close enough to targetX that it can be done in
+                                                    // less than 1 unit of speed
+
+                        newX = targetX;
+                        currentArmy.setCurrentX(newX);
+
+                    } else { // move according to speed
+
+                        newX = oldX - speed;
+                        currentArmy.setCurrentX(newX);
+
+                    }
+
+                } else if (oldX < targetX) { // if current is smaller than target
+
+                    if ((targetX - oldX) < speed) { // if army is close enough to target that it can be done in less
+                                                    // than 1 unit of speed
+
+                        newX = targetX;
+                        currentArmy.setCurrentX(newX);
+
+                    } else { // move according to speed
+
+                        newX = oldX + speed;
+                        currentArmy.setCurrentX(newX);
+
+                    }
+
+                }
+
+            } else if (oldY != targetY) { // if y is not same
+
+                if (oldY > targetY) { // if current is larger than target
+
+                    if ((oldY - targetY) < speed) { // if army is close enough to targetX that it can be done in
+                                                    // less than 1 unit of speed
+
+                        newY = targetY;
+                        currentArmy.setCurrentY(newY);
+
+                    } else { // move according to speed
+
+                        newY = oldY - speed;
+                        currentArmy.setCurrentY(newY);
+                    }
+
+                } else if (oldY < targetY) { // if current is smaller than target
+
+                    if ((targetY - oldY) < speed) { // if army is close enough to target that it can be done in less
+                                                    // than 1 unit of speed
+
+                        newY = targetY;
+                        currentArmy.setCurrentY(newY);
+
+                    } else { // move according to speed
+
+                        newY = oldY + speed;
+                        currentArmy.setCurrentY(newY);
+
+                    }
+
+                }
+
+            }
+
+            // updating map
+            updateMapString(newX, newY, oldX, oldY, ownerID);
+        }
+
     }
 
 }

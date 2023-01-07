@@ -1,6 +1,6 @@
 public class Player {
 
-    protected byte playerID;
+    protected int playerID;
     protected String playerName;
 
     // location coordinates
@@ -8,7 +8,7 @@ public class Player {
     protected int locationY;
     protected Village village;
 
-    public Player(byte playerID, String playerName, int locationX, int locationY) {
+    public Player(int playerID, String playerName, int locationX, int locationY) {
         this.playerID = playerID;
         this.playerName = playerName;
         this.locationX = locationX;
@@ -17,40 +17,39 @@ public class Player {
 
     }
 
-    public byte getPlayerID(){
+    public int getPlayerID() {
         return playerID;
     }
-    
+
     public Village getVillage() {
         return village;
     }
 
-    public int getXCoordinate(){
+    public int getXCoordinate() {
         return locationX;
     }
 
-    public int getYCoordinate(){
+    public int getYCoordinate() {
         return locationY;
     }
-    
-}
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+}
 
 class HumanPlayer extends Player {
 
-    
-    public HumanPlayer(byte playerID, String playerName, int locationX, int locationY){
+    public HumanPlayer(int playerID, String playerName, int locationX, int locationY) {
         super(playerID, playerName, locationX, locationY);
     }
-    
-
-    
 
 }
 
-class AIPlayer extends Player{
+class AIPlayer extends Player {
 
-    public AIPlayer(byte playerID, String playerName, int locationX, int locationY){
+    public AIPlayer(int playerID, String playerName, int locationX, int locationY) {
         super(playerID, playerName, locationX, locationY);
     }
 
