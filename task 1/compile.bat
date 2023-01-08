@@ -1,0 +1,1 @@
+javac Main.java Building.java Map.java Player.java Resources.java Troops.java TroopStats.java Village.java
