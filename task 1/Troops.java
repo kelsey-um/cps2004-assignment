@@ -136,15 +136,11 @@ class Army extends Troops {
     }
 
     public void updateStats() {
-        this.totalAttack = (swordsmen.getAmount() * swordsmen.getAttack()) + (archers.getAmount() * archers.getAttack())
-                + (cavalry.getAmount() * cavalry.getAttack());
+        this.totalAttack = (swordsmen.getAmount() * swordsmen.getAttack()) + (archers.getAmount() * archers.getAttack()) + (cavalry.getAmount() * cavalry.getAttack());
 
-        this.totalHealth = (swordsmen.getAmount() * swordsmen.getHealth()) + (archers.getAmount() * archers.getHealth())
-                + (cavalry.getAmount() * cavalry.getHealth());
+        this.totalHealth = (swordsmen.getAmount() * swordsmen.getHealth()) + (archers.getAmount() * archers.getHealth())+ (cavalry.getAmount() * cavalry.getHealth());
 
-        this.carryingCapacity = (swordsmen.getAmount() * swordsmen.getCarryingCapacity())
-                + (archers.getAmount() * archers.getCarryingCapacity())
-                + (cavalry.getAmount() * cavalry.getCarryingCapacity());
+        this.carryingCapacity = (swordsmen.getAmount() * swordsmen.getCarryingCapacity()) + (archers.getAmount() * archers.getCarryingCapacity()) + (cavalry.getAmount() * cavalry.getCarryingCapacity());
 
         if (swordsmen.getAmount() > 0) {
 
@@ -172,15 +168,16 @@ class Army extends Troops {
 
     public Boolean attackVillage(Player targetPlayer) {
 
+        // to allow easier reference
         Village targetVillage = targetPlayer.getVillage();
         Troops targetTroops = targetVillage.getTroops();
+
         int randomNum;
 
         // calculating attack of village
-        int villageAttack = (targetTroops.getSwordsmen().getAmount() * swordsmen.getAttack())
-                + (targetTroops.getArchers().getAmount() * archers.getAttack())
-                + (targetTroops.getCavalry().getAmount() * cavalry.getAttack());
+        int villageAttack = (targetTroops.getSwordsmen().getAmount() * swordsmen.getAttack()) + (targetTroops.getArchers().getAmount() * archers.getAttack()) + (targetTroops.getCavalry().getAmount() * cavalry.getAttack());
 
+        // getting health of village
         int villageHealth = targetVillage.getHealth();
 
         // army attacks village
@@ -224,10 +221,9 @@ class Army extends Troops {
                     break;
                 }
 
-
             }
 
-            updateStats();
+            updateStats(); // update stats with the new troops numbers
 
         }
 
@@ -274,9 +270,8 @@ class Army extends Troops {
 
             }
 
-            villageHealth = (targetTroops.getSwordsmen().getAmount() * swordsmen.getHealth())
-                    + (targetTroops.getArchers().getAmount() * archers.getHealth())
-                    + (targetTroops.getCavalry().getAmount() * cavalry.getHealth());
+            // update health with new troops numbers
+            villageHealth = (targetTroops.getSwordsmen().getAmount() * swordsmen.getHealth()) + (targetTroops.getArchers().getAmount() * archers.getHealth()) + (targetTroops.getCavalry().getAmount() * cavalry.getHealth());
 
         }
 
@@ -289,6 +284,7 @@ class Army extends Troops {
             Resources targetResources = targetVillage.getResources();
 
             for (int i = 0; i < carryingCapacity; i++) {
+
                 // choose resource at random to steal
                 randomNum = (int) (Math.random() * (3 - 1)) + 1;
 
@@ -341,14 +337,16 @@ class Army extends Troops {
                         break;
                     }
 
-
                 }
             }
 
             return true;
 
         } else { // attacker lost
+
             return false;
+
         }
+
     }
 }

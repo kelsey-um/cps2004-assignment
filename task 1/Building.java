@@ -35,6 +35,7 @@ class ResourceBuilding extends Building {
 
     public void generateResource(Resources resources) {
 
+        //increase resource according to building level
         switch (type) {
 
             case "Farm": {
@@ -66,6 +67,7 @@ class TroopBuilding extends Building {
 
     public void trainTroop(Resources resources, Troops troops, int numberToTrain) {
 
+        //train troops and decrease resources required
         switch (type) {
 
             case "Barracks": {

@@ -202,7 +202,7 @@ public class Map {
 
     public void traverseArmies() {
 
-        for (int i = 0; i < armiesList.size(); i++) {
+        for (int i = 0; i < armiesList.size(); i++) { //iterate through all armies on map
 
             Army currentArmy = armiesList.get(i);
             int ownerID = currentArmy.getOwner().getPlayerID();
@@ -222,8 +222,7 @@ public class Map {
 
                 if (oldX > targetX) { // if current is larger than target
 
-                    if ((oldX - targetX) < speed) { // if army is close enough to targetX that it can be done in
-                                                    // less than 1 unit of speed
+                    if ((oldX - targetX) < speed) { // if army is close enough to targetX that it can be done in less than 1 move
 
                         newX = targetX;
                         currentArmy.setCurrentX(newX);
@@ -237,8 +236,7 @@ public class Map {
 
                 } else if (oldX < targetX) { // if current is smaller than target
 
-                    if ((targetX - oldX) < speed) { // if army is close enough to target that it can be done in less
-                                                    // than 1 unit of speed
+                    if ((targetX - oldX) < speed) { // if army is close enough to target that it can be done in less than 1 move
 
                         newX = targetX;
                         currentArmy.setCurrentX(newX);
@@ -259,8 +257,7 @@ public class Map {
 
                 if (oldY > targetY) { // if current is larger than target
 
-                    if ((oldY - targetY) < speed) { // if army is close enough to targetX that it can be done in
-                                                    // less than 1 unit of speed
+                    if ((oldY - targetY) < speed) { // if army is close enough to targetX that it can be done in 1 move
 
                         newY = targetY;
                         currentArmy.setCurrentY(newY);
@@ -273,9 +270,7 @@ public class Map {
 
                 } else if (oldY < targetY) { // if current is smaller than target
 
-                    if ((targetY - oldY) < speed) { // if army is close enough to target that it can be done in less
-                                                    // than 1 unit of speed
-
+                    if ((targetY - oldY) < speed) { // if army is close enough to target that it can be done in 1 move
                         newY = targetY;
                         currentArmy.setCurrentY(newY);
 
@@ -293,8 +288,7 @@ public class Map {
 
             } else { // target is reached
 
-                if ((currentArmy.getOwner().getXCoordinate() != oldX)
-                        && (currentArmy.getOwner().getYCoordinate() != oldY)) { // arrived at target village and attacks
+                if ((currentArmy.getOwner().getXCoordinate() != oldX) && (currentArmy.getOwner().getYCoordinate() != oldY)) { // arrived at target village and attacks
 
                     Boolean attackSuccess; // success = true, defeat = false
 
@@ -305,12 +299,11 @@ public class Map {
 
                         System.out.println("The attack was successful");
 
-                        if (currentArmy.getTargetPlayer().getVillage().getHealth() <= 0) {
+                        if (currentArmy.getTargetPlayer().getVillage().getHealth() <= 0) { //village is destroyed
 
                             System.out.println("The village has been destroyed");
 
-                            removeVillage(currentArmy.getTargetX(), currentArmy.getTargetY(),
-                                    currentArmy.getTargetPlayer().getPlayerID());
+                            removeVillage(currentArmy.getTargetX(), currentArmy.getTargetY(), currentArmy.getTargetPlayer().getPlayerID());
 
                         }
 

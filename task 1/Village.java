@@ -17,7 +17,7 @@ public class Village {
         this.resources = new Resources();
     }
 
-    private void printNumberedBuildings() {
+    private void printNumberedBuildings() { //print buildings
         for (int i = 0; i < buildings.size(); i++) {
             System.out.println(
                     (i + 1) + ". " + buildings.get(i).getBuildingType() + " "
@@ -65,6 +65,8 @@ public class Village {
             System.out.println("3. Forge");
             System.out.println("Cost: 10 wood, 10 food, 40 metal\n");
 
+
+            // to check if these buildings have already been built
             if (barracks == null) {
                 System.out.println("4. Barracks");
                 System.out.println("Cost: 20 wood, 80 food, 40 metal\n");
@@ -104,6 +106,8 @@ public class Village {
                 case 1: { // farm
 
                     if (resources.getWood() >= 20 && resources.getFood() >= 20 && resources.getMetal() >= 10) {
+
+                        //creating building and decreasing resources it required
 
                         ResourceBuilding tempBuild = new ResourceBuilding("Farm", (buildings.size() + 1));
                         buildings.add(tempBuild);
@@ -251,10 +255,6 @@ public class Village {
                     break outer_loop;
                 }
 
-                default: {
-                    System.out.println("This should never be printed");
-                }
-
             }
 
         }
@@ -312,6 +312,7 @@ public class Village {
                         case "Farm": {
 
                             if (resources.getWood() >= 10 && resources.getFood() >= 10 && resources.getMetal() >= 5) {
+                                //upgrading building and decreasing resource it required
 
                                 buildings.get(userChoice).increaseLevel(); // increase level by 1
 
@@ -435,9 +436,7 @@ public class Village {
                             break;
                         }
 
-                        default: {
-                            System.out.println("This should never print");
-                        }
+                        
                     }
 
                 } else {
@@ -509,8 +508,7 @@ public class Village {
 
                             int buildingLevel = barracks.getBuildingLevel();
 
-                            System.out.println(
-                                    "How many swordsmen would you like to train? Max: " + (buildingLevel * 10));
+                            System.out.println("How many swordsmen would you like to train? Max: " + (buildingLevel * 10));
                             System.out.println("Cost: 10 wood, 10 food, 20 metal");
 
                             while (true) { // input loop
@@ -519,8 +517,7 @@ public class Village {
                                     int amountToTrain = sc.nextInt();
 
                                     if (amountToTrain < 1 || amountToTrain > (buildingLevel * 10)) {
-                                        System.out.println("\nSorry, the maximum amount of troops you can train is "
-                                                + (buildingLevel * 10));
+                                        System.out.println("\nSorry, the maximum amount of troops you can train is "+ (buildingLevel * 10));
                                         break outer_loop;
                                     } else {
 
@@ -528,8 +525,7 @@ public class Village {
                                                 && resources.getFood() >= (10 * amountToTrain)
                                                 && resources.getMetal() >= (20 * amountToTrain)) {
 
-                                            System.out.println("\nYou have successfully trained " + amountToTrain
-                                                    + " swordsmen.");
+                                            System.out.println("\nYou have successfully trained " + amountToTrain+ " swordsmen.");
 
                                             resources.decreaseWood(10 * amountToTrain);
                                             resources.decreaseFood(10 * amountToTrain);
@@ -538,8 +534,7 @@ public class Village {
                                             troops.increaseSwordsmen(amountToTrain);
 
                                         } else {
-                                            System.out
-                                                    .println("\nSorry, you don't have enough resources to do that.");
+                                            System.out.println("\nSorry, you don't have enough resources to do that.");
 
                                         }
 
@@ -570,8 +565,7 @@ public class Village {
 
                             int buildingLevel = archeryRange.getBuildingLevel();
 
-                            System.out
-                                    .println("How many archers would you like to train? Max: " + (buildingLevel * 10));
+                            System.out.println("How many archers would you like to train? Max: " + (buildingLevel * 10));
                             System.out.println("Cost: 10 wood, 20 food, 5 metal");
 
                             while (true) { // input loop
@@ -580,17 +574,13 @@ public class Village {
                                     int amountToTrain = sc.nextInt();
 
                                     if (amountToTrain < 1 || amountToTrain > (buildingLevel * 10)) {
-                                        System.out.println("\nSorry, the maximum amount of troops you can train is "
-                                                + (buildingLevel * 10));
+                                        System.out.println("\nSorry, the maximum amount of troops you can train is " + (buildingLevel * 10));
                                         break outer_loop;
                                     } else {
 
-                                        if (resources.getWood() >= (10 * amountToTrain)
-                                                && resources.getFood() >= (20 * amountToTrain)
-                                                && resources.getMetal() >= (5 * amountToTrain)) {
+                                        if (resources.getWood() >= (10 * amountToTrain) && resources.getFood() >= (20 * amountToTrain) && resources.getMetal() >= (5 * amountToTrain)) {
 
-                                            System.out.println(
-                                                    "\nYou have successfully trained " + amountToTrain + " archers.");
+                                            System.out.println("\nYou have successfully trained " + amountToTrain + " archers.");
 
                                             resources.decreaseWood(10 * amountToTrain);
                                             resources.decreaseFood(20 * amountToTrain);
@@ -599,8 +589,7 @@ public class Village {
                                             troops.increaseArchers(amountToTrain);
 
                                         } else {
-                                            System.out
-                                                    .println("\nSorry, you don't have enough resources to do that.");
+                                            System.out.println("\nSorry, you don't have enough resources to do that.");
 
                                         }
 
@@ -631,8 +620,7 @@ public class Village {
 
                             int buildingLevel = stables.getBuildingLevel();
 
-                            System.out
-                                    .println("How many cavalry would you like to train? Max: " + (buildingLevel * 10));
+                            System.out.println("How many cavalry would you like to train? Max: " + (buildingLevel * 10));
                             System.out.println("Cost: 10 wood, 40 food, 10 metal");
 
                             while (true) { // input loop
@@ -641,17 +629,13 @@ public class Village {
                                     int amountToTrain = sc.nextInt();
 
                                     if (amountToTrain < 1 || amountToTrain > (buildingLevel * 10)) {
-                                        System.out.println("\nSorry, the maximum amount of troops you can train is "
-                                                + (buildingLevel * 10));
+                                        System.out.println("\nSorry, the maximum amount of troops you can train is "+ (buildingLevel * 10));
                                         break outer_loop;
                                     } else {
 
-                                        if (resources.getWood() >= (10 * amountToTrain)
-                                                && resources.getFood() >= (40 * amountToTrain)
-                                                && resources.getMetal() >= (10 * amountToTrain)) {
+                                        if (resources.getWood() >= (10 * amountToTrain) && resources.getFood() >= (40 * amountToTrain) && resources.getMetal() >= (10 * amountToTrain)) {
 
-                                            System.out.println(
-                                                    "\nYou have successfully trained " + amountToTrain + " cavalry.");
+                                            System.out.println("\nYou have successfully trained " + amountToTrain + " cavalry.");
 
                                             resources.decreaseWood(10 * amountToTrain);
                                             resources.decreaseFood(40 * amountToTrain);
@@ -660,8 +644,7 @@ public class Village {
                                             troops.increaseCavalry(amountToTrain);
 
                                         } else {
-                                            System.out
-                                                    .println("\nSorry, you don't have enough resources to do that.\n");
+                                            System.out.println("\nSorry, you don't have enough resources to do that.\n");
 
                                         }
 
@@ -687,10 +670,7 @@ public class Village {
                     case 0: {
 
                         break outer_loop;
-                    }
-
-                    default: {
-                        System.out.println("This should never print");
+                    
                     }
 
                 }
@@ -709,8 +689,7 @@ public class Village {
 
         System.out.println("Creating an army.\n");
 
-        System.out.println(
-                "How many swordsmen would you like to include? Available: " + troops.getSwordsmen().getAmount());
+        System.out.println("How many swordsmen would you like to include? Available: " + troops.getSwordsmen().getAmount());
 
         while (true) { // input loop
             try {
@@ -759,8 +738,7 @@ public class Village {
             }
         }
 
-        System.out
-                .println("\nHow many cavalry would you like to include? Available: " + troops.getCavalry().getAmount());
+        System.out.println("\nHow many cavalry would you like to include? Available: " + troops.getCavalry().getAmount());
 
         while (true) { // input loop
             try {
@@ -788,8 +766,7 @@ public class Village {
 
         for (int i = 0; i < humanPlayerList.size(); i++) {
 
-            if (humanPlayerList.get(i).getVillage().getHealth() > 0
-                    && !(humanPlayerList.get(i).getPlayerID() == owner.getPlayerID())) {
+            if (humanPlayerList.get(i).getVillage().getHealth() > 0 && !(humanPlayerList.get(i).getPlayerID() == owner.getPlayerID())) {
 
                 System.out.println((i + 1) + ". " + humanPlayerList.get(i).getPlayerName());
 
@@ -820,15 +797,15 @@ public class Village {
             }
         }
 
-        army.updateStats();
-        army.setTargets(chosenPlayer);
-        map.addArmy(army);
+        army.updateStats(); //calculating stats
+        army.setTargets(chosenPlayer); //setting the target
+        map.addArmy(army); //adding army to map
 
         System.out.println("\nYour army has been sent to attack");
 
     }
 
-    public void resourceLoop() {
+    public void resourceLoop() { //looping through each building allowing it to generate it resource
 
         Building currentBuilding;
 
@@ -836,7 +813,7 @@ public class Village {
 
             currentBuilding = buildings.get(i);
 
-            if (currentBuilding instanceof ResourceBuilding) {
+            if (currentBuilding instanceof ResourceBuilding) { //only ResourceBuildings can generate resources
 
                 ResourceBuilding currentResource = (ResourceBuilding) currentBuilding;
                 currentResource.generateResource(resources);
@@ -846,7 +823,7 @@ public class Village {
 
     }
 
-    public void armyArrival(Army army) {
+    public void armyArrival(Army army) { //army arrived back to village
 
         Resources armyResource = army.getResources();
 
