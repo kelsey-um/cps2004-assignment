@@ -52,10 +52,6 @@ class ResourceBuilding extends Building {
                 break;
             }
 
-            default: {
-                System.out.println("This should never print");
-            }
-
         }
 
     }

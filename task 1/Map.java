@@ -43,6 +43,27 @@ public class Map {
 
     }
 
+    private void removeMapString(int x, int y, int id) {
+
+        String army = "A" + id;
+
+        String cell = map[y][x];
+
+        cell = cell.replaceFirst(army, "");
+        map[y][x] = cell;
+
+    }
+
+    public void removeVillage(int x, int y, int id) {
+        map[y][x] = map[y][x].replaceFirst("V" + id, "");
+
+        if (map[y][x].isEmpty()) {
+
+            map[y][x] = "--";
+
+        }
+    }
+
     public ArrayList<Integer> initMap(int totalPlayers) {
 
         Random rand = new Random();
@@ -142,33 +163,33 @@ public class Map {
     public void printMap() {
 
         // corner
-        System.out.print("--  ");
+        System.out.print("  \t");
 
         // display numbers on top
         for (int i = 0; i < size; i++) {
             if (i < 10) {
-                System.out.print("0" + i + "  ");
+                System.out.print("0" + i + "\t");
             } else {
-                System.out.print(i + "  ");
+                System.out.print(i + "\t");
             }
 
         }
 
-        System.out.println();
+        System.out.println("\n");
 
         for (int i = 0; i < size; i++) {
 
             // numbers on side
             if (i < 10) {
-                System.out.print("0" + i + "  ");
+                System.out.print("0" + i + "\t");
             } else {
-                System.out.print(i + "  ");
+                System.out.print(i + "\t");
             }
 
             for (int j = 0; j < size; j++) {
-                System.out.print(map[i][j] + "  ");
+                System.out.print(map[i][j] + "\t");
             }
-            System.out.println();
+            System.out.println("\n");
         }
 
     }
@@ -177,15 +198,9 @@ public class Map {
 
         armiesList.add(army);
 
-        // update string
-        // map[army.getCurrentY()][army.getCurrentX()] += "A" +
-        // army.getOwner().getPlayerID();
-
     }
 
     public void traverseArmies() {
-
-        System.out.println("traversing");
 
         for (int i = 0; i < armiesList.size(); i++) {
 
@@ -237,6 +252,9 @@ public class Map {
 
                 }
 
+                // updating map
+                updateMapString(newX, newY, oldX, oldY, ownerID);
+
             } else if (oldY != targetY) { // if y is not same
 
                 if (oldY > targetY) { // if current is larger than target
@@ -270,10 +288,52 @@ public class Map {
 
                 }
 
+                // updating map
+                updateMapString(newX, newY, oldX, oldY, ownerID);
+
+            } else { // target is reached
+
+                if ((currentArmy.getOwner().getXCoordinate() != oldX)
+                        && (currentArmy.getOwner().getYCoordinate() != oldY)) { // arrived at target village and attacks
+
+                    Boolean attackSuccess; // success = true, defeat = false
+
+                    // attack
+                    attackSuccess = currentArmy.attackVillage(currentArmy.getTargetPlayer());
+
+                    if (attackSuccess == true) { // attack was successful troops will return home
+
+                        System.out.println("The attack was successful");
+
+                        if (currentArmy.getTargetPlayer().getVillage().getHealth() <= 0) {
+
+                            System.out.println("The village has been destroyed");
+
+                            removeVillage(currentArmy.getTargetX(), currentArmy.getTargetY(),
+                                    currentArmy.getTargetPlayer().getPlayerID());
+
+                        }
+
+                        currentArmy.setTargetX(currentArmy.getOwner().getXCoordinate());
+                        currentArmy.setTargetY(currentArmy.getOwner().getYCoordinate());
+
+                    } else { // attack failed army was killed
+                        System.out.println("The attack was not successful and the army was defeated");
+                        armiesList.remove(i);
+                        removeMapString(oldX, oldY, ownerID);
+
+                    }
+
+                } else { // arrived back home
+
+                    currentArmy.friendlyArrival();
+                    armiesList.remove(i);
+                    removeMapString(oldX, oldY, ownerID);
+
+                }
+
             }
 
-            // updating map
-            updateMapString(newX, newY, oldX, oldY, ownerID);
         }
 
     }

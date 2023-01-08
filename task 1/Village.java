@@ -30,8 +30,20 @@ public class Village {
         return health;
     }
 
+    public Troops getTroops(){
+        return troops;
+    }
+
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void decreaseHealth(int health){
+        this.health -= health;
+    }
+
+    public Resources getResources(){
+        return resources;
     }
 
     public void buildBuilding(Scanner sc) {
@@ -431,6 +443,7 @@ public class Village {
                 } else {
                     System.out.println("This building is already at its max level!");
                 }
+
             } else {
 
                 System.out.println("You currently don't have any buildings in your village!");
@@ -689,10 +702,10 @@ public class Village {
         }
     }
 
-    public void createArmy(Scanner sc, HumanPlayer humanPlayerList[], Player owner, Map map) {
+    public void createArmy(Scanner sc, ArrayList<HumanPlayer> humanPlayerList, Player owner, Map map) {
 
         int amount;
-        Army army = new Army();
+        Army army = new Army(owner);
 
         System.out.println("Creating an army.\n");
 
@@ -722,7 +735,7 @@ public class Village {
         }
 
         System.out
-                .println("\nHow many archers would you like to include? Availabe: " + troops.getArchers().getAmount());
+                .println("\nHow many archers would you like to include? Available: " + troops.getArchers().getAmount());
 
         while (true) { // input loop
             try {
@@ -747,7 +760,7 @@ public class Village {
         }
 
         System.out
-                .println("\nHow many cavalry would you like to include? Availabe: " + troops.getCavalry().getAmount());
+                .println("\nHow many cavalry would you like to include? Available: " + troops.getCavalry().getAmount());
 
         while (true) { // input loop
             try {
@@ -773,12 +786,12 @@ public class Village {
 
         System.out.println("\nWhich player would you like to attack?");
 
-        for (int i = 0; i < humanPlayerList.length; i++) {
+        for (int i = 0; i < humanPlayerList.size(); i++) {
 
-            if (humanPlayerList[i].getVillage().getHealth() > 0
-                    && !(humanPlayerList[i].getPlayerID() == owner.getPlayerID())) {
+            if (humanPlayerList.get(i).getVillage().getHealth() > 0
+                    && !(humanPlayerList.get(i).getPlayerID() == owner.getPlayerID())) {
 
-                System.out.println((i + 1) + ". " + humanPlayerList[i].getPlayerName());
+                System.out.println((i + 1) + ". " + humanPlayerList.get(i).getPlayerName());
 
             }
 
@@ -792,11 +805,11 @@ public class Village {
 
                 userChoice = sc.nextInt();
 
-                if (userChoice < 0 || userChoice > humanPlayerList.length || userChoice == owner.getPlayerID()) {
+                if (userChoice < 0 || userChoice > humanPlayerList.size() || userChoice == owner.getPlayerID()) {
                     System.out.println("Sorry, that is not a valid choice");
                 } else {
 
-                    chosenPlayer = (HumanPlayer) humanPlayerList[userChoice - 1];
+                    chosenPlayer = (HumanPlayer) humanPlayerList.get(userChoice - 1);
                     break;
 
                 }
@@ -807,9 +820,11 @@ public class Village {
             }
         }
 
-        army.updateStats(chosenPlayer.getXCoordinate(), chosenPlayer.getYCoordinate(), owner, map);
+        army.updateStats();
+        army.setTargets(chosenPlayer);
+        map.addArmy(army);
 
-        System.out.println("\nYour army has been created");
+        System.out.println("\nYour army has been sent to attack");
 
     }
 
@@ -830,4 +845,21 @@ public class Village {
         }
 
     }
+
+    public void armyArrival(Army army) {
+
+        Resources armyResource = army.getResources();
+
+        // collecting resources
+        resources.increaseWood(armyResource.getWood());
+        resources.increaseFood(armyResource.getFood());
+        resources.increaseMetal(armyResource.getMetal());
+
+        // putting back troops
+        troops.increaseSwordsmen(army.getSwordsmen().getAmount());
+        troops.increaseArchers(army.getArchers().getAmount());
+        troops.increaseCavalry(army.getCavalry().getAmount());
+
+    }
+
 }

@@ -41,7 +41,7 @@ class Swordsmen extends TroopStats {
     public Swordsmen() {
         attack = 20;
         speed = 1;
-        health = 30;
+        health = 10;
         carryingCapacity = 4;
         amount = 0;
     }
@@ -53,7 +53,7 @@ class Archers extends TroopStats {
     public Archers() {
         attack = 10;
         speed = 2;
-        health = 10;
+        health = 5;
         carryingCapacity = 8;
         amount = 0;
     }
@@ -66,7 +66,7 @@ class Cavalry extends TroopStats {
 
         attack = 30;
         speed = 4;
-        health = 20;
+        health = 15;
         carryingCapacity = 15;
         amount = 0;
 
