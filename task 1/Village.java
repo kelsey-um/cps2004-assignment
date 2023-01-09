@@ -15,6 +15,7 @@ public class Village {
         this.health = 100;
         this.troops = new Troops();
         this.resources = new Resources();
+        resources.startingResources();
     }
 
     private void printNumberedBuildings() { //print buildings
@@ -703,6 +704,7 @@ public class Village {
                     System.out.println("\nYou've added " + amount + " swordsmen to your army");
 
                     army.increaseSwordsmen(amount);
+                    troops.decreaseSwordsmen(amount);
 
                     break;
                 }
@@ -713,8 +715,7 @@ public class Village {
             }
         }
 
-        System.out
-                .println("\nHow many archers would you like to include? Available: " + troops.getArchers().getAmount());
+        System.out.println("\nHow many archers would you like to include? Available: " + troops.getArchers().getAmount());
 
         while (true) { // input loop
             try {
@@ -728,6 +729,7 @@ public class Village {
                     System.out.println("\nYou've added " + amount + " archers to your army");
 
                     army.increaseArchers(amount);
+                    troops.decreaseArchers(amount);
 
                     break;
                 }
@@ -752,6 +754,7 @@ public class Village {
                     System.out.println("\nYou've added " + amount + " cavalry to your army");
 
                     army.increaseCavalry(amount);
+                    troops.decreaseCavalry(amount);
 
                     break;
                 }

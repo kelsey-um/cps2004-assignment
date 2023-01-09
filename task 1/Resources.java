@@ -5,6 +5,12 @@ public class Resources {
 
     // every village starts with enough resources to build one of each resource generating buildings
     public Resources() {
+        this.food = 0;
+        this.wood = 0;
+        this.metal = 0;
+    }
+
+    public void startingResources(){ //set enough resources to build one of each resource generating buildings
         this.food = 40;
         this.wood = 50;
         this.metal = 70;
