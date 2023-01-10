@@ -10,6 +10,7 @@ int main(){
         game.userInput();
         
         if(game.gameCheck == 2){
+            cout << "You hit a bomb! You've lost the game.";
             break;
         }
 
