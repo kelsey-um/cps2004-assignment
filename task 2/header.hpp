@@ -214,8 +214,6 @@ class Minesweeper{
 
            gameCheck = 2;
 
-           cout << "You have hit a mine. Game Over!";
-
         } else if(grid[y][x].value == "00"){ //00 is hit and 8 adjacent open
             
             showCell(y,x);
