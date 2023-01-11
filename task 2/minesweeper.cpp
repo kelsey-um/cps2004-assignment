@@ -6,7 +6,7 @@ int main(){
 
     game.generateGridValues();
 
-    while(game.cellsOpened < (game.totalCells-game.noMines) && game.gameCheck == 0){
+    while(game.getCellsOpened() < (game.getTotalCells()-game.getNoMines()) && game.getGameCheck() == 0){
         game.userInput();
         
         if(game.gameCheck == 2){
@@ -16,7 +16,7 @@ int main(){
 
     }
 
-    if (game.gameCheck == 1){
+    if (game.getGameCheck() == 1){
         cout << "Good job! You've won the game.\n";
     }
 
