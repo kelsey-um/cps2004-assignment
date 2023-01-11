@@ -10,17 +10,17 @@ int main(){
         game.userInput();
         
         if(game.gameCheck == 2){
-            cout << "You hit a bomb! You've lost the game.";
+            cout << "You hit a bomb! You've lost the game.\n";
             break;
         }
 
     }
 
     if (game.gameCheck == 1){
-        cout << "Good job! You've won the game.";
+        cout << "Good job! You've won the game.\n";
     }
 
-
+    system("pause");
 
     return 0;
 }

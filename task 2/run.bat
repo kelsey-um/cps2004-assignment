@@ -1,2 +1,1 @@
 start a.exe
-pause
